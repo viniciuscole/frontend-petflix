@@ -1,6 +1,6 @@
 # Frontend petflix
 
-    Use **npm run dev** para iniciar a aplicação em **http://localhost:3000**
+   Use `npm run dev` para iniciar a aplicação em `http://localhost:3000`
 
 ## Páginas:
 
