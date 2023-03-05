@@ -16,5 +16,6 @@ body {
 :root{
     --primary: white;
     --secondary: #FFBF31;
-    --tertiary: #609A9B
+    --tertiary: #609A9B;
+    --quaternary: #1A1A1A;
 }
