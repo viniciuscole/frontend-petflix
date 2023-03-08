@@ -28,14 +28,14 @@ export function Header(){
                 <Link href={"/meusfilmes"}>
                     <li>MEUS FILMES</li>
                 </Link>
-                <Link href={"/usuarios"}>
+                <Link href={"/usuarios"} style={isAdmin?{}:{display: 'none'}}>
                     <li>USUARIOS</li>
                 </Link>
             </ul>
 
             <SearchBar/>
 
-            <div className={styles.adminDiv} style={isAdmin?{}:{visibility:'hidden'}}>
+            <div className={styles.adminDiv} style={isAdmin?{}:{display: 'none'}}>
                 <Image src={adminIcon} alt="icone logado como admin"/>
                 <p>LOGADO COMO ADMIN</p>
             </div>
