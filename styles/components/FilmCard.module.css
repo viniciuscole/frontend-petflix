@@ -1,0 +1,55 @@
+.filmCard{
+    height: 300px;
+    width: auto;
+    position: relative;
+}
+
+.filmCard:hover{
+    opacity: 40%;
+    transition: opacity 0.2s;
+}
+
+.filmCard::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent, black);
+    filter: blur(10px);
+    z-index: 1;
+  }
+
+.filmCard img{
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    /* do a blur/shadow inside the img (on the bottom only) */
+    box-shadow: 0 0 0 1000px rgba(0,0,0,1) inset;
+}
+
+.watchedFilmsStats, .nextFilmsStats{
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    gap: 15px;
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.watchedFilmsStats img, .nextFilmsStats img{
+    height: 15px;
+    width: auto;
+}
+
+.watchedFilmsStats p{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
