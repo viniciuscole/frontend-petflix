@@ -5,7 +5,7 @@
 }
 
 .filmCard:hover{
-    opacity: 30%;
+    opacity: 40%;
     transition: opacity 0.2s;
 }
 
@@ -43,8 +43,13 @@
 }
 
 .watchedFilmsStats img, .nextFilmsStats img{
-    /* center the img */
     height: 15px;
     width: auto;
+}
+
+.watchedFilmsStats p{
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 

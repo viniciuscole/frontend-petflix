@@ -34,8 +34,8 @@
 .watchedFilms, .nextFilms{
     display: flex;
     flex-direction: row;
+    gap: 60px;
     flex-wrap: wrap;
-    gap: 20px;
     overflow-x: auto;
     overflow-y: hidden;
     width: 100%;

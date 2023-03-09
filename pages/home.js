@@ -15,8 +15,8 @@ function Home({nextFilms, watchedFilms}){
             <div className={styles.homeMain}>
                 <div className={styles.watchedFilmsContainer}>
                     <section className={styles.watchedFilmsText}>
-                        <p>ÚLTIMOS FILMES</p>
-                        <p className={styles.qtdWatchedFilmsText}>{watchedFilms.length} FILMES/SÉRIES</p>
+                        <p>LAST FILMS</p>
+                        <p className={styles.qtdWatchedFilmsText}>{watchedFilms.length} FILMS/SERIES</p>
                     </section>
                     <section className={styles.watchedFilms}>
                         {watchedFilms.map((film, index) => {
@@ -37,8 +37,8 @@ function Home({nextFilms, watchedFilms}){
                 </div>
                 <div className={styles.nextFilmsContainer}>
                     <section className={styles.nextFilmsText}>
-                        <p>PRÓXIMOS FILMES</p>
-                        <p className={styles.qtdNextFilmsText}>{nextFilms.length} FILMES/SÉRIES</p>
+                        <p>NEXT FILMS</p>
+                        <p className={styles.qtdNextFilmsText}>{nextFilms.length} FILMS/SERIES</p>
                     </section>
                     <section className={styles.nextFilms}>
                         {nextFilms.map((film, index) => {
@@ -66,7 +66,7 @@ function Home({nextFilms, watchedFilms}){
 export async function getServerSideProps() {
     // pegar dados do backend
     const nextFilms = [{cardImage: exampleImg, filmViews: 7, filmRating: 3.2, filmTitle: "Pelé", filmLikes: 7, filmDislikes: 2}];
-    const watchedFilms = [{cardImage: exampleImg, filmViews: 7, filmRating: 3.2, filmTitle: "Pelé", filmLikes: 7, filmDislikes: 2}, {cardImage: exampleImg, filmViews: 5, filmRating: 1.2, filmTitle: "Pelé", filmLikes: 1, filmDislikes: 2}];
+    const watchedFilms = [{cardImage: exampleImg, filmViews: 7, filmRating: 3.2, filmTitle: "Pelé", filmLikes: 7, filmDislikes: 2}, {cardImage: exampleImg, filmViews: 5, filmRating: 1.2, filmTitle: "Pelé", filmLikes: 1, filmDislikes: 2}, {cardImage: exampleImg, filmViews: 7, filmRating: 3.2, filmTitle: "Pelé", filmLikes: 7, filmDislikes: 2}, {cardImage: exampleImg, filmViews: 5, filmRating: 1.2, filmTitle: "Pelé", filmLikes: 1, filmDislikes: 2}, {cardImage: exampleImg, filmViews: 7, filmRating: 3.2, filmTitle: "Pelé", filmLikes: 7, filmDislikes: 2}, {cardImage: exampleImg, filmViews: 5, filmRating: 1.2, filmTitle: "Pelé", filmLikes: 1, filmDislikes: 2}];
     return {
         props: {
             nextFilms,

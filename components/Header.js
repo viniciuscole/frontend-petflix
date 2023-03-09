@@ -20,16 +20,16 @@ export function Header(){
             <Image src={logoImg} alt="logo do petflix" />
             <ul className={styles.linksList}>
                 <Link href={"/home"}>
-                    <li>INÍCIO</li>
+                    <li>HOME</li>
                 </Link>
                 <Link href={"/rankings"}>
                     <li>RANKINGS</li>
                 </Link>
                 <Link href={"/meusfilmes"}>
-                    <li>MEUS FILMES</li>
+                    <li>MY FILMS</li>
                 </Link>
                 <Link href={"/usuarios"} style={isAdmin?{}:{display: 'none'}}>
-                    <li>USUARIOS</li>
+                    <li>USERS</li>
                 </Link>
             </ul>
 
@@ -37,12 +37,12 @@ export function Header(){
 
             <div className={styles.adminDiv} style={isAdmin?{}:{display: 'none'}}>
                 <Image src={adminIcon} alt="icone logado como admin"/>
-                <p>LOGADO COMO ADMIN</p>
+                <p>LOGGED AS ADMIN</p>
             </div>
 
             <div className={styles.sairDiv}>
                 <Image src={sairIcon} alt="ícone de sair"/>
-                <p>SAIR</p>
+                <p>LEAVE</p>
             </div>
 
             <Image src={profilePic} alt="imagem do perfil"/>
