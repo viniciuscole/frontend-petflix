@@ -5,16 +5,18 @@
 ## Páginas:
 
 ### Thamya e Sofia
-- Thumbnail (1 pessoa)
-- Login (1 pessoa)
-- Rankings (1 pessoa)
+ - Thumbnail (1 pessoa)
+ - Rankings (1 pessoa)
 
 ### Arthur e Ana
-- Pesquisa (1 pessoa)
-- Cadastro (2 pessoas)
-- Meus filmes (2 pessoas)
+ - Cadastro (2 pessoas)
+ - Meus filmes (2 pessoas)
 
 ### Vinicius e Afonso
-- Home (2-3 pessoas)
-- Admin | Home (2 pessoa)
-- Admin | Usuários (2 pessoas)
+ - Home (2-3 pessoas)
+ - Admin | Home (2 pessoa)
+ - Admin | Usuários (2 pessoas)
+
+### João Morais
+- Login
+- Busca
