@@ -6,4 +6,21 @@
 .homeMain{
     width: 100vw;
     height: 100vh;
+    padding: 50px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
 }
+.watchedFilmsText, .nextFilmsText{
+    color: white;
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    display: flex;
+    gap: 30px;
+}
+.qtdWatchedFilmsText, .qtdNextFilmsText{
+    color: #333;
+}
+
+
