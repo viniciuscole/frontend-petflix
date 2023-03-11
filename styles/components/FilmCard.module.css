@@ -162,3 +162,22 @@
     font-weight: 500;
     color: var(--quinary);
 }
+
+.evaluationsContent{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    height: 150px;
+    overflow-y: auto;
+}
+.evaluationsContent::-webkit-scrollbar {
+    width: 4px;
+    background: var(--quinary);
+    border-radius: 10px;
+}
+.evaluationsContent::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+    border-radius: 10px;
+}

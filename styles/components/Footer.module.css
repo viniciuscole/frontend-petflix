@@ -9,4 +9,7 @@
 }
 .footerText{
     padding-right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
 }

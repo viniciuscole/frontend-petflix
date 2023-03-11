@@ -1,0 +1,61 @@
+.evaluation{
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 380px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.profilePic{
+    height: 100%;
+    border-radius: 50%;
+    width: 60px;
+}
+.profilePic img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.evaluationContent{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.evaluationContent h3{
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #fff;
+}
+.evaluationContent p{
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #fff;
+}
+.detailedEvaluationInfo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.evaluationRating{
+    display: flex;
+    gap: 5px;
+}
+.watchedOn{
+    color: var(--quinary);
+    font-size: 0.6rem;
+}
+.watchedOn p{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.watchedOnComponent{
+    color: var(--primary);
+    font-size: 0.6rem;
+    font-weight: 500;
+    display: flex;
+    gap: 5px;
+}
