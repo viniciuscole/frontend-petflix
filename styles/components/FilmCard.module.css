@@ -53,3 +53,112 @@
     gap: 5px;
 }
 
+.closeButton{
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.cardFilmExpanded{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.cardFilmContent{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    height: auto;
+    width: auto;
+    background-color: #0A0A0A;
+    min-width: 900px;
+    min-height: 500px;
+    border-radius: 5px;
+}
+
+.leftPart{
+    position: relative;
+}
+
+.leftPart .cardImg{
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+
+.filmStats{
+    color: var(--primary);
+    height: 100%;
+    width: 100%;
+    padding: 50px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.headerStats{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.detailedInformation{
+    color: var(--quinary);
+    font-size: 0.8rem;
+}
+
+.ratingStats{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ratingStats p{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.description{
+    margin-top: 15px;
+    font-size: 11px;
+    font-weight: 300;
+}
+
+.evaluations{
+    margin-top: 15px;
+}
+
+.evaluationsHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.evaluationsHeader h2{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.evaluationsHeader p{
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: var(--quinary);
+}
