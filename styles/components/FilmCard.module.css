@@ -25,7 +25,6 @@
     height: 100%;
     width: auto;
     object-fit: cover;
-    /* do a blur/shadow inside the img (on the bottom only) */
     box-shadow: 0 0 0 1000px rgba(0,0,0,1) inset;
 }
 
@@ -83,9 +82,10 @@
     height: auto;
     width: auto;
     background-color: #0A0A0A;
-    min-width: 900px;
+    min-width: 1000px;
     min-height: 500px;
     border-radius: 5px;
+    gap: 50px;
 }
 
 .leftPart{
@@ -143,6 +143,8 @@
 
 .evaluations{
     margin-top: 15px;
+    width: 400px;
+    align-self: center;
 }
 
 .evaluationsHeader{
@@ -180,4 +182,32 @@
 .evaluationsContent::-webkit-scrollbar-thumb {
     background: var(--secondary);
     border-radius: 10px;
+}
+
+.postEvaluation{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.postEvaluation textarea{
+    height: 55px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--quinary);
+    resize: none;
+    background-color: var(--primary);
+}
+
+.evaluationOptions{
+    margin-top: 20px;
+}
+
+.fodase {
+    display: flex;
 }

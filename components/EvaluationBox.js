@@ -56,8 +56,6 @@ export function EvaluationBox({profilePic, username, evaluation, rating, watched
             break;
     }
 
-    console.log(rating)
-
     return (
         <div className={styles.evaluation}>
             <div className={styles.profilePic}>

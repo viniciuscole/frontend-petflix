@@ -2,7 +2,7 @@ import Image from "next/image"
 import { useState } from "react"
 import ReactDOM from 'react-dom';
 
-import styles from "../styles/components/FilmCard.module.css"
+import styles from "@/styles/components/FilmCard.module.css"
 
 import { EvaluationBox } from "@/components/EvaluationBox";
 
@@ -11,15 +11,28 @@ import likeIcon from "@/assets/likeIcon.png"
 import dislikeIcon from "@/assets/dislikeIcon.png"
 import estrelaIcon from "@/assets/estrelaIcon.png"
 import closeIcon from "@/assets/closeIcon.png"
+import fullStar from '@/assets/fullStar.png'
+import emptyStar from '@/assets/emptyStar.png'
 
 import exempleProfilePic from "@/assets/exempleProfilePic.png"
 
 
-export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes, filmDislikes, filmYear, filmGenres, filmDescription, qtdEvaluations, wasWatched=false}){
+export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes, filmDislikes, filmYear, filmGenres, filmDescription, wasWatched=false}){
 
     const [isExpanded, setIsExpanded] = useState(false)
+    const [comment, setComment] = useState('')
+    const [isFilled, setIsFilled] = useState(false)
+    const [rating, setRating] = useState(0);
+    const [hover, setHover] = useState(0);
 
-    let evaluations = [];
+
+    let evaluations = [{profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 0},
+    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 2},
+    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 0},
+    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 3},
+    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 4},
+    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 5},
+    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 6},];
 
     const handleClick = () =>{
         // pegar comentarios via api
@@ -29,6 +42,17 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
     const handleClose = () =>{
         setIsExpanded(false)
     }
+
+    const handleCommentChange = (e) =>{
+        const {value} = e.target
+        setComment(value.substring(0,140))
+    }
+
+    function handleRatingClick(value) {
+        setRating(value);
+        setHover(value);
+        setIsFilled(true);
+      }
 
     const card = (
         <div className={styles.filmCard} onClick={handleClick}>
@@ -71,17 +95,41 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
                             <section className={styles.evaluations} style={wasWatched ? {}:{display:'none'}}>
                                 <section className={styles.evaluationsHeader}>
                                     <h2>EVALUATIONS</h2>
-                                    <p>{qtdEvaluations} PEOPLE</p>
+                                    <p>{evaluations.length} PEOPLE</p>
                                 </section>
                                 <section className={styles.evaluationsContent}>
-                                    <EvaluationBox profilePic={exempleProfilePic} username={"JOÃOZINHO PIPOCA"} evaluation={"Achei bem meia boca, mas é bom até, mais ou menos."} rating={3} watchedOn = {0} />
-                                    <EvaluationBox profilePic={exempleProfilePic} username={"JOÃOZINHO PIPOCA"} evaluation={"Achei bem meia boca, mas é bom até, mais ou menos."} rating={3} watchedOn = {1} />
-                                    <EvaluationBox profilePic={exempleProfilePic} username={"JOÃOZINHO PIPOCA"} evaluation={"Achei bem meia boca, mas é bom até, mais ou menos."} rating={5} watchedOn = {2} />
-                                    <EvaluationBox profilePic={exempleProfilePic} username={"JOÃOZINHO PIPOCA"} evaluation={"Achei bem meia boca, mas é bom até, mais ou menos."} rating={1} watchedOn = {3} />
-                                    <EvaluationBox profilePic={exempleProfilePic} username={"JOÃOZINHO PIPOCA"} evaluation={"Achei bem meia boca, mas é bom até, mais ou menos."} rating={1} watchedOn = {4} />
-                                    <EvaluationBox profilePic={exempleProfilePic} username={"JOÃOZINHO PIPOCA"} evaluation={"Achei bem meia boca, mas é bom até, mais ou menos."} rating={1} watchedOn = {5} />
-                                    <EvaluationBox profilePic={exempleProfilePic} username={"JOÃOZINHO PIPOCA"} evaluation={"Achei bem meia boca, mas é bom até, mais ou menos."} rating={1} watchedOn = {6} />
+                                    {evaluations.map((evaluation, index) => (
+                                        <EvaluationBox key={index} profilePic={evaluation.profilePic} username={evaluation.username} evaluation={evaluation.evaluation} rating={evaluation.rating} watchedOn={evaluation.watchedOn}/>
+                                    ))}
 
+                                </section>
+                                <section className={styles.postEvaluation}>
+                                    <textarea name="evaluation" value={comment} onChange={handleCommentChange} placeholder="Tell us your opinion..." maxLength={140}></textarea>
+                                    <div className={styles.fodase}>
+                                        <p>WATCHED ON:</p>
+                                        <select name="selectWatchedOn">
+                                            <option value="0">NETFLIX</option>
+                                            <option value="1">AMAZON</option>
+                                            <option value="2">HBO</option>
+                                            <option value="3">DISNEY</option>
+                                            <option value="4">STAR PLUS</option>
+                                            <option value="5">CLARO</option>
+                                            <option value="6">PIRATEX</option>
+                                        </select>
+                                        <div>
+                                            {[...Array(5)].map((_, index) => (
+                                                <span
+                                                key={index}
+                                                onMouseEnter={() => setHover(index + 1)}
+                                                onMouseLeave={() => isFilled? setHover(rating) : setHover(0)}
+                                                onClick={() => handleRatingClick(index + 1)}
+                                                >
+                                                {hover >= index + 1 ? <Image src={fullStar} alt=""/> : <Image src={emptyStar} alt=""/>}
+                                                </span>
+                                            ))}
+                                        </div>
+                                        <button>EVALUATE</button>
+                                    </div>
                                 </section>
                             </section>
                         </section>
