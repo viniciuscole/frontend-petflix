@@ -21,19 +21,22 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
 
     const [isExpanded, setIsExpanded] = useState(false)
     const [comment, setComment] = useState('')
-    const [isFilled, setIsFilled] = useState(false)
     const [rating, setRating] = useState(0);
+    const [watchedOn, setWatchedOn] = useState("0");
+    const [isFilled, setIsFilled] = useState(false)
     const [hover, setHover] = useState(0);
+    const [hasFirstSubmited, setHasFirstSubmited] = useState(false)
     const [hasSubmited, setHasSubmited] = useState(false)
+    const [isEvaluationBoxExpanded, setIsEvaluationBoxExpanded] = useState(false)
 
 
-    let evaluations = [{profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 0},
-    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 2},
-    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 0},
-    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 3},
-    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 4},
-    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 5},
-    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 6},];
+    let evaluations = [{profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: "0"},
+    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: "2"},
+    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: "0"},
+    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: "3"},
+    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: "4"},
+    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: "5"},
+    {profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: "6"},];
 
     const handleClick = () =>{
         // pegar comentarios via api
@@ -42,6 +45,10 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
 
     const handleClose = () =>{
         setIsExpanded(false)
+    }
+
+    const handleCloseSubmitBox = () =>{
+        setIsEvaluationBoxExpanded(false)
     }
 
     const handleCommentChange = (e) =>{
@@ -53,23 +60,32 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
         setRating(value);
         setHover(value);
         setIsFilled(true);
-      }
+    }
+
+    function handleSelect(){
+        const selectElement = document.getElementById("selectWatchedOn");
+        const selectedOptionValue = selectElement.options[selectElement.selectedIndex].value;
+        setWatchedOn(selectedOptionValue);
+    }
     
     function handleSubmmitEvaluation(e){
         e.preventDefault();
-        if(!hasSubmited && comment.length > 0){
-            const selectElement = document.getElementById("selectWatchedOn");
-            const selectedOptionValue = selectElement.options[selectElement.selectedIndex].value;
-            const ratingValue = rating;
-            const commentValue = comment;
-            console.log(selectedOptionValue, ratingValue, commentValue);
-            setHasSubmited(true);
+        if(comment.length > 0){
+            setIsEvaluationBoxExpanded(true);
+            if(!hasFirstSubmited)
+                setHasFirstSubmited(true);
+            else
+                setHasSubmited(true)
         }
-        else{
-            alert("Você já avaliou esse filme!")
-        }
+    }
 
-        
+    function handleAddComment(e){
+        e.preventDefault();
+        handleCloseSubmitBox();
+        console.log(comment, rating, watchedOn)
+        setComment('')
+        setRating(0)
+        setWatchedOn(0)
     }
 
     const card = (
@@ -86,6 +102,24 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
             </section>
         </div>
     );
+
+    const addEvaluationBox = (
+        <section className={styles.submitBox}>
+            <div className={styles.submitBoxContent}>
+                <Image src={closeIcon} alt="ícone sair" onClick={handleCloseSubmitBox} className={styles.submitBoxCloseButton}/>
+                {hasSubmited ? <h1>UPDATE EVALUATION</h1> : <h1>ADD EVALUATION</h1>}
+                <section style={!hasSubmited ? {display : 'none'}:{}}>
+                    <h2>CURRENT</h2>
+                    <EvaluationBox profilePic={exempleProfilePic} username="JOÃOZINHO PIPOCA" evaluation={comment} rating={rating} watchedOn={watchedOn}/>
+                </section>
+                <section>
+                    <h2>PREVIEW</h2>
+                    <EvaluationBox profilePic={exempleProfilePic} username="JOÃOZINHO PIPOCA" evaluation={comment} rating={rating} watchedOn={watchedOn}/>
+                </section>
+                {hasSubmited ? <button onClick={handleAddComment}>UPDATE</button> : <button onClick={handleAddComment}>ADD</button>}
+            </div>
+        </section>
+    )
 
     return (
        <>
@@ -125,7 +159,7 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
                                     <textarea required name="evaluation" value={comment} onChange={handleCommentChange} placeholder="Tell us your opinion..." maxLength={140}></textarea>
                                     <div className={styles.evaluationDetails}>
                                         <p>WATCHED ON:</p>
-                                        <select name="selectWatchedOn" id="selectWatchedOn">
+                                        <select name="selectWatchedOn" id="selectWatchedOn" onClick={handleSelect}>
                                             <option value="0">NETFLIX</option>
                                             <option value="1">AMAZON</option>
                                             <option value="2">HBO</option>
@@ -155,6 +189,7 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
                 </div>,
                 document.body
               )}
+              {isEvaluationBoxExpanded && addEvaluationBox}
         </>
     )
 

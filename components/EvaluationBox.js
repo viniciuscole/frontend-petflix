@@ -13,41 +13,41 @@ import claroTVIcon from '../assets/claroTVIcon.png'
 import piratexIcon from '../assets/piratexIcon.png'
 
 
-export function EvaluationBox({profilePic, username, evaluation, rating, watchedOn = 0}){
+export function EvaluationBox({profilePic, username, evaluation, rating, watchedOn = "0"}){
 
     let watchedOnComponent = null;
     switch (watchedOn) {
-        case 0:
+        case "0":
             watchedOnComponent = (
                 <p className={styles.watchedOnComponent}>NETFLIX <Image src={netflixIcon} alt="netflix icon" /></p>
             )
             break;
-        case 1:
+        case "1":
             watchedOnComponent = (
                 <p className={styles.watchedOnComponent}>AMAZON <Image src={primeVideoIcon} alt="prime video icon" /></p>
             )
             break;
-        case 2:
+        case "2":
             watchedOnComponent = (
                 <p className={styles.watchedOnComponent}>HBO <Image src={HBOMaxIcon} alt="hbo max icon" /></p>
             )
             break;
-        case 3:
+        case "3":
             watchedOnComponent = (
                 <p className={styles.watchedOnComponent}>DISNEY <Image src={disneyPlusIcon} alt="disney plus icon" /></p>
             )
             break;
-        case 4:
+        case "4":
             watchedOnComponent = (
                 <p className={styles.watchedOnComponent}>STAR PLUS <Image src={starPlusIcon} alt="star plus icon" /></p>
             )
             break;
-        case 5:
+        case "5":
             watchedOnComponent = (
                 <p className={styles.watchedOnComponent}>CLARO <Image src={claroTVIcon} alt="claro tv icon" /></p>
             )
             break;
-        case 6:
+        case "6":
             watchedOnComponent = (
                 <p className={styles.watchedOnComponent}>PIRATEX <Image src={piratexIcon} alt="piratex icon" /></p>
             )

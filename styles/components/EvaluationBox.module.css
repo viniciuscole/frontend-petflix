@@ -4,7 +4,6 @@
     padding: 0;
     margin: 0;
     width: 380px;
-    height: 60px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -13,15 +12,20 @@
     height: 100%;
     border-radius: 50%;
     width: 60px;
+    display: flex;
+    align-items: center;
+    
 }
 .profilePic img{
     width: 100%;
-    height: 100%;
     border-radius: 50%;
 }
 .evaluationContent{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    overflow-wrap: break-word;
+    width: 300px;
     gap: 5px;
 }
 .evaluationContent h3{
