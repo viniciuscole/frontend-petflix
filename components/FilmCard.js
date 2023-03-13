@@ -24,6 +24,7 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
     const [isFilled, setIsFilled] = useState(false)
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
+    const [hasSubmited, setHasSubmited] = useState(false)
 
 
     let evaluations = [{profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: 0},
@@ -53,6 +54,23 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
         setHover(value);
         setIsFilled(true);
       }
+    
+    function handleSubmmitEvaluation(e){
+        e.preventDefault();
+        if(!hasSubmited && comment.length > 0){
+            const selectElement = document.getElementById("selectWatchedOn");
+            const selectedOptionValue = selectElement.options[selectElement.selectedIndex].value;
+            const ratingValue = rating;
+            const commentValue = comment;
+            console.log(selectedOptionValue, ratingValue, commentValue);
+            setHasSubmited(true);
+        }
+        else{
+            alert("Você já avaliou esse filme!")
+        }
+
+        
+    }
 
     const card = (
         <div className={styles.filmCard} onClick={handleClick}>
@@ -103,11 +121,11 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
                                     ))}
 
                                 </section>
-                                <section className={styles.postEvaluation}>
-                                    <textarea name="evaluation" value={comment} onChange={handleCommentChange} placeholder="Tell us your opinion..." maxLength={140}></textarea>
-                                    <div className={styles.fodase}>
+                                <form className={styles.postEvaluation}>
+                                    <textarea required name="evaluation" value={comment} onChange={handleCommentChange} placeholder="Tell us your opinion..." maxLength={140}></textarea>
+                                    <div className={styles.evaluationDetails}>
                                         <p>WATCHED ON:</p>
-                                        <select name="selectWatchedOn">
+                                        <select name="selectWatchedOn" id="selectWatchedOn">
                                             <option value="0">NETFLIX</option>
                                             <option value="1">AMAZON</option>
                                             <option value="2">HBO</option>
@@ -128,9 +146,9 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
                                                 </span>
                                             ))}
                                         </div>
-                                        <button>EVALUATE</button>
+                                        <button onClick={handleSubmmitEvaluation}>EVALUATE</button>
                                     </div>
-                                </section>
+                                </form>
                             </section>
                         </section>
                     </div>

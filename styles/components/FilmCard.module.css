@@ -208,6 +208,54 @@
     margin-top: 20px;
 }
 
-.fodase {
+.evaluationDetails{
+    margin-top: 15px;
     display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.evaluationDetails p {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--quinary);
+}
+
+.evaluationDetails select{
+    background-color: var(--quinary);
+    color: var(--primary);
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.evaluationDetails select option{
+    border: none;
+}
+
+.evaluationDetails select:focus{
+    outline: none;
+}
+
+.evaluationDetails select:hover{
+    cursor: pointer;
+}
+
+.evaluationDetails div:hover{
+    cursor: pointer;
+}
+
+.evaluationDetails button {
+    background-color: var(--secondary);
+    color: var(--primary);
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+.evaluationDetails button:hover{
+    cursor: pointer;
 }
