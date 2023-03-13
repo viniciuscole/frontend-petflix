@@ -325,5 +325,9 @@
     cursor: pointer;
 }
 
-
+.likeIcon:hover, .dislikeIcon:hover{
+    cursor: pointer;
+    transform: scale(1.4);
+}
+    
 

@@ -28,6 +28,8 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
     const [hasFirstSubmited, setHasFirstSubmited] = useState(false)
     const [hasSubmited, setHasSubmited] = useState(false)
     const [isEvaluationBoxExpanded, setIsEvaluationBoxExpanded] = useState(false)
+    const [hasLiked, setHasLiked] = useState(false)
+    const [hasDisliked, setHasDisliked] = useState(false)
 
 
     let evaluations = [{profilePic:exempleProfilePic, username:"JOÃOZINHO PIPOCA", evaluation:"Achei bem meia boca, mas é bom até, mais ou menos.", rating:3, watchedOn: "0"},
@@ -88,6 +90,28 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
         setWatchedOn(0)
     }
 
+    function handleLike(){
+        if(!hasLiked){
+            setHasLiked(true)
+            setHasDisliked(false)
+        }
+        else{
+            setHasLiked(false)
+        }
+        // enviar pra api
+    }
+
+    function handleDislike(){
+        if(!hasDisliked){
+            setHasDisliked(true)
+            setHasLiked(false)
+        }
+        else{
+            setHasDisliked(false)
+        }
+        // enviar pra api
+    }
+
     const card = (
         <div className={styles.filmCard} onClick={handleClick}>
             <Image src={cardImage} alt={filmTitle+" foto de capa"} priority />
@@ -138,8 +162,8 @@ export function FilmCard({cardImage, filmViews, filmRating, filmTitle, filmLikes
                                 <section className={styles.ratingStats}>
                                     <p style={wasWatched ? {}:{display:'none'}}>{filmViews} <Image src={viewIcon} alt="icone vizualizção" /></p>
                                     <p style={wasWatched ? {}:{display:'none'}}>{filmRating} <Image src={estrelaIcon} alt="icone estrela" /></p>
-                                    <p>{filmLikes} <Image src={likeIcon} alt="ícone like" /></p>
-                                    <p>{filmDislikes} <Image src={dislikeIcon} alt="ícone dislike" /></p>
+                                    <p>{filmLikes} <Image onClick={handleLike} style={hasLiked ? {transform:'scale(1.4)'} : {}} className={styles.likeIcon} src={likeIcon} alt="ícone like" /></p>
+                                    <p>{filmDislikes} <Image onClick={handleDislike} className={styles.dislikeIcon} style={hasDisliked ? {transform:'scale(1.4)'} : {}} src={dislikeIcon} alt="ícone dislike" /></p>
                                 </section>
                             </div>
                             <p className={styles.detailedInformation}>{filmYear}・{filmGenres}</p>
