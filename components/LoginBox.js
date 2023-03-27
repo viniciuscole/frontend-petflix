@@ -10,10 +10,20 @@ export function LoginBox(){
             <div className={styles.title}>LET'S GET STARTED</div>
             <div className={styles.subtitle}>ENTER YOUR CREDENTIALS TO ACCESS THE MOVIES</div>
             
-            <form className={styles.form}>
-                <input type="text" id="email" name="Email" className={styles.inputBox}></input>
-                <input type="text" id="password" name="Password" className={styles.inputBox}></input>
+            <form>
+                <p className={styles.form}>
+                    <input type="text" id="email" name="Email" className={styles.inputBox}></input>
+                </p>
+
+                <p className={styles.form}>
+                    <input type="text" id="password" name="Password" className={styles.inputBox}></input>
+                </p>
             </form>
+            
+            <div className={styles.forgotPassword}>
+                <p><a href={"/home"} id={styles.linkForgot}>FORGOT PASSWORD</a></p>
+            </div>
         </div>
+
     )
 }
