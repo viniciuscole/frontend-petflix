@@ -6,9 +6,9 @@ import styles from '../styles/components/LoginBox.module.css'
 
 export function LoginBox(){
     return(
-        <div className={styles.main}>
+        <div className={styles.main}>   
             <div className={styles.title}>LET'S GET STARTED</div>
-            <div className={styles.subtitle}>ENTER YOUR CREDENTIALS TO ACCESS THE MOVIES</div>
+            <p className={styles.subtitle}>ENTER YOUR CREDENTIALS TO ACCESS THE MOVIES</p>
             
             <form>
                 <p className={styles.form}>
@@ -23,6 +23,9 @@ export function LoginBox(){
             <div className={styles.forgotPassword}>
                 <p><a href={"/home"} id={styles.linkForgot}>FORGOT PASSWORD</a></p>
             </div>
+
+            <div className={styles.divButton}><button className={styles.button}>LOGIN</button></div>
+
         </div>
 
     )
