@@ -6,6 +6,11 @@
     background-color: #333333;
     display: flexbox;
     padding: 70px 0px 0px 0px;
+    border-style: solid;
+    border-color: #FFBF31;
+    border-width: 5px;
+    border-top: none;
+    border-bottom: none;
 }
 
 .title{
