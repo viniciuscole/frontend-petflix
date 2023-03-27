@@ -35,26 +35,49 @@
     margin-top: 10px;
 }
 
-.inputBox{
-    width: 20em;
+.inputBox1{
+    width: 25em;
     height: 40px;
     border: none;
     border-radius: 5px;
     background-color: #C7C7C7;
     margin-bottom: 0.5em;
     margin: auto;    
+    padding: 10px 10px 10px 50px;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+
+    background-image: url("../../assets/iconEmail.svg");
+    background-repeat: no-repeat;
+    background-position: 15px 11.5px;
 }
 
-.forgotPassword{
+.inputBox2{
+    width: 25em;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #C7C7C7;
+    margin-bottom: 0.5em;
+    margin: auto;    
+    padding: 10px 10px 10px 50px;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+
+    background-image: url("../../assets/iconPassword.svg");
+    background-repeat: no-repeat;
+    background-position: 14px 11.5px;
+}
+
+.forgotPassword, #linkForgot:visited{
     font-family: 'Roboto', sans-serif;
     font-size: 10px;
     color: #609A9B;
-    text-align: center;
+    text-align: right;
+    padding-right: 7.5em;
     margin-bottom: 10px;
-}
-
-#linkForgot:visited{
-    color: #609A9B;
 }
 
 .button {
@@ -64,19 +87,22 @@
     height: 3em;
     border-radius: 4px;
     
-    color: white;
+    color: #609A9B;
     font-family: "Roboto" sans-serif;
     font-size: 12px;
     font-weight: bold;
 
     align-items: center;
     text-align: center;
+
+    cursor: pointer;
   }
 
   .button:hover{
     transition: 0.3s;
     border: solid #609A9B;
     background-color: #609A9B;
+    color: white;
   }
 
   .divButton{

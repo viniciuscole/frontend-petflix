@@ -11,13 +11,13 @@ export function LoginBox(){
             <p className={styles.subtitle}>ENTER YOUR CREDENTIALS TO ACCESS THE MOVIES</p>
             
             <form>
-                <p className={styles.form}>
-                    <input type="text" id="email" name="Email" className={styles.inputBox}></input>
-                </p>
+                <div className={styles.form}>
+                    <input type="text" id="email" name="Email" className={styles.inputBox1} placeholder="EMAIL"></input>
+                </div>
 
-                <p className={styles.form}>
-                    <input type="text" id="password" name="Password" className={styles.inputBox}></input>
-                </p>
+                <div className={styles.form}>
+                    <input type="password" id="password" name="Password" className={styles.inputBox2} placeholder="PASSWORD"></input>
+                </div>
             </form>
             
             <div className={styles.forgotPassword}>
