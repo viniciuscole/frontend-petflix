@@ -1,6 +1,7 @@
 import Image from "next/image"
 
 import logoImg from "@/assets/logo.png"
+import iconForgotPass from "@/assets/iconForgotPass.svg"
 
 import styles from '../styles/components/LoginBox.module.css'
 
@@ -21,7 +22,10 @@ export function LoginBox(){
             </form>
             
             <div className={styles.forgotPassword}>
-                <p><a href={"/home"} id={styles.linkForgot}>FORGOT PASSWORD</a></p>
+                <p>
+                    <Image src={iconForgotPass} className={styles.imageForgot} />
+                    <a href={"/home"} id={styles.linkForgot}>FORGOT PASSWORD</a>
+                </p>
             </div>
 
             <div className={styles.divButton}><button className={styles.button}>LOGIN</button></div>
