@@ -38,6 +38,7 @@ export function LoginBox(){
                 </a>
             </div>
 
+            <span className={styles.centerCircle}><div className={styles.bottomCircle}></div></span>
         </div>
 
     )
