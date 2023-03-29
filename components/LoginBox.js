@@ -2,14 +2,17 @@ import Image from "next/image"
 
 import logoImg from "@/assets/logo.png"
 import iconForgotPass from "@/assets/iconForgotPass.svg"
+import iconSignUp from "@/assets/iconSignUp.svg"
 
 import styles from '../styles/components/LoginBox.module.css'
 
 export function LoginBox(){
     return(
         <div className={styles.main}>   
+            <span className={styles.centerCircle}><div className={styles.topCircle}></div></span>
+            
             <div className={styles.title}>LET'S GET STARTED</div>
-            <p className={styles.subtitle}>ENTER YOUR CREDENTIALS TO ACCESS THE MOVIES</p>
+            <div className={styles.subtitle}>ENTER YOUR CREDENTIALS TO ACCESS THE MOVIES</div>
             
             <form>
                 <div className={styles.form}>
@@ -21,14 +24,19 @@ export function LoginBox(){
                 </div>
             </form>
             
-            <div className={styles.forgotPassword}>
-                <p>
-                    <Image src={iconForgotPass} className={styles.imageForgot} />
-                    <a href={"/home"} id={styles.linkForgot}>FORGOT PASSWORD</a>
-                </p>
+            <div className={styles.imageContainerForgot}>
+                <a href={"/home"} className={styles.linkForgot}>
+                    <Image src={iconForgotPass} id={styles.imageForgot}/>FORGOT PASSWORD
+                </a>
             </div>
-
+            
             <div className={styles.divButton}><button className={styles.button}>LOGIN</button></div>
+
+            <div className={styles.imageContainerSignUp}>
+                <a href={"/home"} className={styles.linkSignUp}>
+                    <Image src={iconSignUp} id={styles.imageSignUp}/>SIGN UP
+                </a>
+            </div>
 
         </div>
 

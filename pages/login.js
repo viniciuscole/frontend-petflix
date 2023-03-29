@@ -4,7 +4,7 @@ import { LoginBox } from '@/components/LoginBox'
 
 function Login(){
     return(
-        <LoginBox />
+       <div className={styles.home}><LoginBox /></div>
     )
 }
 
