@@ -6,15 +6,15 @@ export default function Admin(){
     return (
         <div className={styles.admin}>
             <Header />
-                <div className={styles.usersContainer}>
+                <div className={styles.usersConteiner}>
                     <section className={styles.usersConteinerText}>
                         <span>
                             <p>REGISTERED USERS</p>
-                            <p className={styles.qtdUsersText}>0 USERS</p>
+                            <p id={styles.qtdUsers}>0 USERS</p>
                         </span>
                         <span>
                             <p>REGISTERING ALLOWED</p>
-                            <p>CHANGE</p>
+                            <p id={styles.changeBtn}>CHANGE</p>
                         </span>
                     </section>
                     <section className={styles.usersConteinerContent}>
