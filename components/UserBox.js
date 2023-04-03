@@ -9,12 +9,12 @@ export function UserBox({ username, registrationYear, qtdEvaluations, profilePic
   return (
     <div className={styles.userBox}>
       <Image src={profilePic} alt={username+" profile pic"}/>
-      <section>
-        <p>{username}</p>
+      <section className={styles.content}>
+        <h3>{username}</h3>
         <p>YEAR OF REGISTRATION: {registrationYear}</p>
         <p>EVALUATIONS: {qtdEvaluations}</p>
       </section>
-      <BsFillTrashFill color="#FF8383"/>
+      <BsFillTrashFill className={styles.icon} color="#FF8383"/>
     </div>
   );
 }
