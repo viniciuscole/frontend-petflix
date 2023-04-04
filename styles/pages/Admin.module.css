@@ -4,13 +4,17 @@
     width: 100vw;
 }
 
+.adminContent{
+    height: 100vh;
+}
+
 .usersConteiner{
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     height: auto;
-    margin: 100px 150px;
+    margin: 100px auto;
+    width: 85%;
 }
 
 .usersConteinerText{
@@ -37,4 +41,13 @@
 
 .usersConteinerText span p#qtdUsers{
     color: var(--quaternary);
+}
+
+.usersConteinerContent{
+    display: flex;
+    margin-top: 50px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    row-gap: 30px;
+    gap: 30px;
 }

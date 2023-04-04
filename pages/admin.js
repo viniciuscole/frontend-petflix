@@ -10,6 +10,7 @@ export default function Admin(){
     return (
         <div className={styles.admin}>
             <Header />
+            <div className={styles.adminContent}>
                 <div className={styles.usersConteiner}>
                     <section className={styles.usersConteinerText}>
                         <span>
@@ -23,8 +24,20 @@ export default function Admin(){
                     </section>
                     <section className={styles.usersConteinerContent}>
                         <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
+                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
+                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
+                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
+                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
+                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
+                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
+                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
+                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
+                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
+                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
+                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
                     </section>
                 </div>
+            </div>
             <Footer />
         </div>
     )
