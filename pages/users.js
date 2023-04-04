@@ -1,4 +1,4 @@
-import styles from '@/styles/pages/Admin.module.css'
+import styles from '@/styles/pages/Users.module.css'
 
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -6,11 +6,11 @@ import { UserBox } from '@/components/UserBox'
 
 import exempleProfilePic from '@/assets/exempleProfilePic.png'
 
-export default function Admin(){
+export default function Users(){
     return (
-        <div className={styles.admin}>
+        <div className={styles.users}>
             <Header />
-            <div className={styles.adminContent}>
+            <div className={styles.usersContent}>
                 <div className={styles.usersConteiner}>
                     <section className={styles.usersConteinerText}>
                         <span>
