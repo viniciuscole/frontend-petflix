@@ -30,7 +30,7 @@ export function UserBox({ username, registrationYear, qtdEvaluations, profilePic
           <p>YEAR OF REGISTRATION: {registrationYear}</p>
           <p>EVALUATIONS: {qtdEvaluations}</p>
         </section>
-        <BsFillTrashFill className={styles.icon} color="#FF8383"/>
+        <BsFillTrashFill className={styles.icon}/>
       </div>
       {isExpanded && (
         <div className={styles.userEvaluationsBox}>
