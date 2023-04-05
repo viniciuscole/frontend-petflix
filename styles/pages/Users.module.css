@@ -39,6 +39,10 @@
     cursor: pointer;
 }
 
+.usersConteinerText span p#changeBtn:hover{
+    opacity: 0.7;
+}
+
 .usersConteinerText span p#qtdUsers{
     color: var(--quaternary);
 }
