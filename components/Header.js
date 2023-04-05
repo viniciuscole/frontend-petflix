@@ -25,10 +25,10 @@ export function Header(){
                 <Link href={"/rankings"}>
                     <li>RANKINGS</li>
                 </Link>
-                <Link href={"/meusfilmes"}>
+                <Link href={"/mymovies"}>
                     <li>MY FILMS</li>
                 </Link>
-                <Link href={"/usuarios"} style={isAdmin?{}:{display: 'none'}}>
+                <Link href={"/users"} style={isAdmin?{}:{display: 'none'}}>
                     <li>USERS</li>
                 </Link>
             </ul>
