@@ -85,9 +85,27 @@
     margin-bottom: 10px;
 }
 
-.userEvaluationsBoxContent h3{
+.username{
     font-size: 1rem;
     font-weight: 700;
     color: var(--tertiary);
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.evaluations{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 300px;
+    overflow-y: auto;
+}
+
+.evaluations::-webkit-scrollbar {
+    width: 4px;
+    background: var(--quinary);
+    border-radius: 10px;
+}
+.evaluations::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+    border-radius: 10px;
 }
