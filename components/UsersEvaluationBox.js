@@ -1,6 +1,4 @@
-import styles from '../styles/components/EvaluationBox.module.css'
-
-import Image from 'next/image'
+import styles from '@/styles/components/UsersEvaluationBox.module.css'
 
 import fullStar from '../assets/fullStar.png'
 import emptyStar from '../assets/emptyStar.png'
@@ -12,9 +10,9 @@ import starPlusIcon from '../assets/starPlusIcon.png'
 import claroTVIcon from '../assets/claroTVIcon.png'
 import piratexIcon from '../assets/piratexIcon.png'
 
+import Image from 'next/image'
 
-export function EvaluationBox({profilePic, username, evaluation, rating=0, watchedOn = "0"}){
-
+export function UsersEvaluationBox({filmPic, filmName, evaluation, rating=0, watchedOn = "0"}){
     let watchedOnComponent = null;
     switch (watchedOn) {
         case "0":
@@ -57,26 +55,24 @@ export function EvaluationBox({profilePic, username, evaluation, rating=0, watch
     }
 
     return (
-        <div className={styles.evaluation}>
-            <div className={styles.profilePic}>
-                <Image src={profilePic} alt="profile pic" />
+        <div className={styles.UserEvaluation}>
+            <div className={styles.evaluationFilmPic}>
+                <Image src={filmPic} alt={'Capa do filme'+filmName}/>
             </div>
             <div className={styles.evaluationContent}>
-                <h3>{username}</h3>
-                <p>{evaluation}</p>
-                <section className={styles.detailedEvaluationInfo}>
-                    <div className={styles.evaluationRating}>
+                <h3 className={styles.filmName}>{filmName}</h3>
+                <p className={styles.evaluationText}>{evaluation}</p>
+                <div className={styles.evaluationRating}>
                         {[...Array(rating)].map((_, index) => (
                             <Image key={index} src={fullStar} alt=""/>
                         ))}
                         {[...Array((5-rating))].map((_, index) => (
                             <Image key={index} src={emptyStar} alt=""/>
                         ))}
-                    </div>
-                    <div className={styles.watchedOn}>
-                        <h5>WATCHED ON: {watchedOnComponent}</h5>
-                    </div>
-                </section>
+                </div>
+                <div className={styles.watchedOn}>
+                    <h5>WATCHED ON: </h5> {watchedOnComponent}
+                </div>
             </div>
         </div>
     )
