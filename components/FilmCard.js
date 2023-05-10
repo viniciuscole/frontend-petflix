@@ -14,31 +14,9 @@ import closeIcon from "@/assets/closeIcon.png"
 import fullStar from "@/assets/fullStar.png"
 import emptyStar from "@/assets/emptyStar.png"
 
-async function readUser(authorization) {
-    let name = "EU"
-    let profilePic = "@/assets/exempleProfilePic.png"
-
-    return [name, profilePic]
-}
+import exempleProfilePic from "@/assets/exempleProfilePic.png"
 
 // pegar dados da api
-async function getMovie(authorization, imdbId) {
-    let title = "gato de botas"
-    let year = "2023"
-    let genre = "pica"
-    let plot = "puss in boots pica pra carai"
-    let evaluations = [
-        {
-            profilePic: "@/assets/exempleProfilePic.png",
-            username: "JOÃOZINHO PIPOCA",
-            evaluation: "Achei bem meia boca, mas é bom até, mais ou menos.",
-            rating: 3,
-            watchedOn: "6",
-        },
-    ]
-
-    return [title, year, genre, plot, evaluations]
-}
 
 export function FilmCard({
     wasWatched,
@@ -62,31 +40,50 @@ export function FilmCard({
     const [hasLiked, setHasLiked] = useState(false)
     const [hasDisliked, setHasDisliked] = useState(false)
 
-    // authorization está salvo no header da página após o login
-    let authorization
+    const [username, setUsername] = useState("")
+    const [profilePic, setProfilePic] = useState("")
+    const [filmTitle, setFilmTitle] = useState("")
+    const [filmYear, setFilmYear] = useState("")
+    const [filmGenres, setFilmGenres] = useState("")
+    const [filmDescription, setFilmDescription] = useState("")
+    const [evaluations, setEvaluations] = useState([])
 
-    let username
-    let profilePic
-    let filmTitle
-    let filmYear
-    let filmGenres
-    let filmDescription
-    let evaluations = []
+    const authorization = "123"
 
-    /*
-    useEffect(() => {
-        const fetch = async () => {
-            [username, profilePic] = await readUser(authorization)
-            [filmTitle, filmYear, filmGenres, filmDescription, evaluations] =
-                await getMovie(authorization, imdbId)
-        }
-        fetch()
-    }, [])
-    */
+    const requestGetMovie = async (authorization, imdbId) => {
+        let title = "gato de botas"
+        let year = "2023"
+        let genre = "pica"
+        let plot = "puss in boots pica pra carai"
+        let evaluations = [
+            {
+                profilePic: exempleProfilePic,
+                username: "JOÃOZINHO PIPOCA",
+                evaluation:
+                    "Achei bem meia boca, mas é bom até, mais ou menos.",
+                rating: 3,
+                watchedOn: "6",
+            },
+        ]
+
+        setFilmTitle(title)
+        setFilmYear(year)
+        setFilmGenres(genre)
+        setFilmDescription(plot)
+        setEvaluations(evaluations)
+    }
+
+    const requestReadUser = async (authorization) => {
+        let name = "EU"
+        let profilePic = exempleProfilePic
+
+        setUsername(name)
+        setProfilePic(profilePic)
+    }
+
     const handleClick = async () => {
-        ;[username, profilePic] = await readUser(authorization)
-        ;[filmTitle, filmYear, filmGenres, filmDescription, evaluations] =
-            await getMovie(authorization, imdbId)
+        await requestReadUser(authorization)
+        await requestGetMovie(authorization, imdbId)
         setIsExpanded(true)
     }
 

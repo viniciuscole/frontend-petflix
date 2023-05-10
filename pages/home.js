@@ -66,19 +66,21 @@ function Home({ nextFilms, watchedFilms }) {
 }
 
 export async function getServerSideProps() {
-    // pegar dados do backend
-    const nextFilms = [
-        {
-            wasWatched: false,
-            imdbId: 123,
-            cardImage: exampleImg,
-            filmViews: 7,
-            filmRating: 3.2,
-            filmLikes: 7,
-            filmDislikes: 2,
+    const authorization = "123"
+
+    const nextFilms = await requestSuggestedMovies(authorization)
+    const watchedFilms = await requestWatchedMovies(authorization)
+
+    return {
+        props: {
+            nextFilms,
+            watchedFilms,
         },
-    ]
-    const watchedFilms = [
+    }
+}
+
+const requestWatchedMovies = async (authorization) => {
+    return [
         {
             wasWatched: true,
             imdbId: 123,
@@ -89,12 +91,19 @@ export async function getServerSideProps() {
             filmDislikes: 2,
         },
     ]
-    return {
-        props: {
-            nextFilms,
-            watchedFilms,
+}
+const requestSuggestedMovies = async (authorization) => {
+    return [
+        {
+            wasWatched: false,
+            imdbId: 123,
+            cardImage: exampleImg,
+            filmViews: 7,
+            filmRating: 3.2,
+            filmLikes: 7,
+            filmDislikes: 2,
         },
-    }
+    ]
 }
 
 export default Home
