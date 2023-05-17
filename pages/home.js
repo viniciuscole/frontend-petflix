@@ -30,7 +30,7 @@ function Home({ nextFilms, watchedFilms }) {
                                     filmRating={film.filmRating}
                                     filmLikes={film.filmLikes}
                                     filmDislikes={film.filmDislikes}
-                                    isAdmin={true}
+                                    isAdmin={true} //para testar só. isso tem q vir do backend
                                     
                                 />
                             )
