@@ -30,6 +30,8 @@ function Home({ nextFilms, watchedFilms }) {
                                     filmRating={film.filmRating}
                                     filmLikes={film.filmLikes}
                                     filmDislikes={film.filmDislikes}
+                                    isAdmin={true}
+                                    
                                 />
                             )
                         })}
@@ -54,6 +56,7 @@ function Home({ nextFilms, watchedFilms }) {
                                     filmRating={film.filmRating}
                                     filmLikes={film.filmLikes}
                                     filmDislikes={film.filmDislikes}
+                                    isAdmin={true}
                                 />
                             )
                         })}

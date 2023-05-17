@@ -13,6 +13,8 @@ import estrelaIcon from "@/assets/estrelaIcon.png"
 import closeIcon from "@/assets/closeIcon.png"
 import fullStar from "@/assets/fullStar.png"
 import emptyStar from "@/assets/emptyStar.png"
+import removeFilmIcon from "@/assets/removeFilmIcon.png"
+import addFilmIcon from "@/assets/addFilmIcon.png"
 
 import exempleProfilePic from "@/assets/exempleProfilePic.png"
 
@@ -26,6 +28,7 @@ export function FilmCard({
     filmRating,
     filmLikes,
     filmDislikes,
+    isAdmin,
 }) {
     const [isExpanded, setIsExpanded] = useState(false)
     const [comment, setComment] = useState("")
@@ -39,6 +42,7 @@ export function FilmCard({
         useState(false)
     const [hasLiked, setHasLiked] = useState(false)
     const [hasDisliked, setHasDisliked] = useState(false)
+    const [isHoveredAdmin, setIsHoveredAdmin] = useState(false)
 
     const [username, setUsername] = useState("")
     const [profilePic, setProfilePic] = useState("")
@@ -151,9 +155,23 @@ export function FilmCard({
         // enviar pra api
     }
 
+    function handleHoverInAdmin () {
+        if (isAdmin) {
+            setIsHoveredAdmin(true)
+        }
+    }
+
+    function handleHoverOutAdmin () {
+        if (isAdmin) {
+            setIsHoveredAdmin(false)
+        }
+    }
+
     const card = (
-        <div className={styles.filmCard} onClick={handleClick}>
-            <Image src={cardImage} alt={filmTitle + " foto de capa"} priority />
+        <div className={styles.filmCard} onMouseEnter={handleHoverInAdmin} onMouseLeave={handleHoverOutAdmin}>
+            <Image className={styles.filmImage} src={cardImage} alt={filmTitle + " foto de capa"}  />
+            {isHoveredAdmin && wasWatched && <Image className={styles.adminButton} src={removeFilmIcon} alt="" />}
+            {isHoveredAdmin && !wasWatched && <Image className={styles.adminButton} src={addFilmIcon} alt="" />}
             <section
                 className={styles.watchedFilmsStats}
                 style={wasWatched ? {} : { display: "none" }}
@@ -223,7 +241,7 @@ export function FilmCard({
     return (
         <>
             {card}
-            {isExpanded &&
+            {isExpanded && !isAdmin &&
                 ReactDOM.createPortal(
                     <div className={styles.cardFilmExpanded}>
                         <div className={styles.cardFilmContent}>
