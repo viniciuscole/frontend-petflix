@@ -1,45 +1,55 @@
-import Image from "next/image"
-
-import logoImg from "@/assets/logo.png"
-import iconForgotPass from "@/assets/iconForgotPass.svg"
-import iconSignUp from "@/assets/iconSignUp.svg"
-
-import styles from '../styles/components/LoginBox.module.css'
+import Helmet from 'react-helmet'
+import styles from "../styles/components/LoginBox.module.css"
 
 export function LoginBox(){
     return(
-        <div className={styles.main}>   
-            <span className={styles.centerCircle}><div className={styles.topCircle}></div></span>
+        <div className={styles.main}>
+            <div className={styles.mainCard}>
             
-            <div className={styles.title}>LET'S GET STARTED</div>
-            <div className={styles.subtitle}>ENTER YOUR CREDENTIALS TO ACCESS THE MOVIES</div>
-            
-            <form>
-                <div className={styles.form}>
-                    <input type="text" id="email" name="Email" className={styles.inputBox1} placeholder="EMAIL"></input>
+            <Helmet>
+                <meta name="theme-color" content="#000000" />
+            </Helmet>
+
+                <div className={styles.circle}>
+
+                    <div id={styles.topCircle}></div>
+
                 </div>
 
-                <div className={styles.form}>
-                    <input type="password" id="password" name="Password" className={styles.inputBox2} placeholder="PASSWORD"></input>
+                <div className={styles.texts}>
+
+                    <p id={styles.mainTitle}>LET’S GET STARTED</p>
+                    <p id={styles.subtitle}>ENTER YOUR CREDENTIALS TO ACCESS THE MOVIES</p>
+
                 </div>
-            </form>
-            
-            <div className={styles.imageContainerForgot}>
-                <a href={"/home"} className={styles.linkForgot}>
-                    <Image src={iconForgotPass} id={styles.imageForgot}/>FORGOT PASSWORD
-                </a>
-            </div>
-            
-            <div className={styles.divButton}><button className={styles.button}>LOGIN</button></div>
+                
+                <form className={styles.form}>
+                
+                    <input type="text" id={styles.email} name="Email" placeholder="EMAIL"  autocomplete="off"></input>
+                    <input type="password" id={styles.password} name="Password" placeholder="PASSWORD"  autocomplete="off"></input>
 
-            <div className={styles.imageContainerSignUp}>
-                <a href={"/home"} className={styles.linkSignUp}>
-                    <Image src={iconSignUp} id={styles.imageSignUp}/>SIGN UP
-                </a>
+                    <a href={'./home'}id={styles.forgotPassword}>
+                        <div id={styles.queryForgot}></div>
+                        FORGOT PASSWORD
+                    </a>
+
+                    <button id={styles.button}>LOGIN</button>
+
+                    <a href={'./home'}id={styles.signUp}>
+                        <div id={styles.imgSignUp}></div>
+                        SIGN UP
+                    </a>
+                
+                </form>
+
+                <div className={styles.circle}>
+
+                    <div id={styles.bottomCircle}></div>
+
+                </div>
+
             </div>
 
-            <span className={styles.centerCircle}><div className={styles.bottomCircle}></div></span>
         </div>
-
     )
 }

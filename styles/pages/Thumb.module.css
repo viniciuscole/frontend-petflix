@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+
+.home{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 1.2em;
+    margin-bottom: 2em;
+    background-color: #101010;
+}
+
+.main{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+#button{
+  border: solid #609A9B;
+  background-color: #131313;
+  
+
+  border-radius: 4px;
+  position: absolute;
+    width: 133px;
+    height: 33px;
+    left: 186px;
+    top: 515px;
+
+  color: #609A9B;
+  font-family: "Roboto" sans-serif;
+  font-size: 0.8em;
+  font-weight: bold;
+
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+#button:hover{
+  transition: 0.2s;
+  border: solid #609A9B;
+  background-color: #609A9B;
+  color: white;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo2{
+    position: absolute;
+    width: 131px;
+    height: 99.57px;
+    left: 186px;
+    top: 126px;
+}
+
+.text{
+    position: absolute;
+    width: 615px;
+    height: 196px;
+    left: 186px;
+    top: 279px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 35.9759px;
+    line-height: 136%;
+    /* or 49px */
+
+    display: flex;
+    align-items: center;
+
+    color: #FFFFFF;
+}
+
+.pet{
+    position: absolute;
+    width: 263px;
+    height: 28px;
+    left: 369px;
+    top: 164.5px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 27.6231px;
+    line-height: 100%;
+    /* identical to box height, or 28px */
+
+    display: flex;
+    align-items: center;
+
+    color: #333333;
+}
+
+.desenhos {
+    position: absolute;
+    width: 615px;
+    height: 196px;
+    left: 550px;
+    top: 200px;
+
+}
