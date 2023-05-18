@@ -1,0 +1,19 @@
+.evaluationCard {
+    display: flex;
+    align-items: center;
+    min-width: 300px;
+    justify-content: space-between;
+}
+
+.watchedOn {
+    color: var(--quinary);
+    font-size: 1rem;
+}
+
+.watchedOnComponent{
+    color: var(--primary);
+    font-size: 0.7rem;
+    font-weight: 500;
+    display: flex;
+    margin-top: .5vh;
+}

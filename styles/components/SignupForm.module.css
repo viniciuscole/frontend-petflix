@@ -1,0 +1,139 @@
+.main {
+    display: flex;
+    width: 80%;
+    padding-top: 3%;
+    gap: 2vw
+}
+
+.signupForm {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 3vh;
+    column-gap: 2vw;
+    max-height: 20vh;
+    grid-template-areas: "name password"
+                         "email passwordConfirm"
+                         "button -";
+}
+
+.formComponent {
+    font-size: .8rem;
+}
+
+.formComponent > input {
+    margin-top: .3vh;
+    min-width: 20vw;
+}
+
+.formInput {
+    background-color: #C7C7C7;
+    color: #878787;
+    padding: 0px 15px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+.formComponent:nth-child(2) {
+    grid-area: name;
+}
+.formComponent:nth-child(2) {
+    grid-area: email;
+}
+.formComponent:nth-child(3) {
+    grid-area: password;
+}
+.formComponent:nth-child(4) {
+    grid-area: passwordConfirm;
+}
+.formComponent:nth-child(5) {
+    grid-area: button;
+}
+
+#submitBtn {
+    color: var(--primary);
+    background-color: var(--tertiary);
+    height: 35px;
+    width: 200px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.profileContainer {
+    flex: 1;
+    height: 90%;
+    width: 80%;
+    font-size: .8rem;
+    min-width: 400px;
+}
+
+.profileChoice {
+    display: flex;
+    flex-wrap: wrap;
+    width: 75%;
+    max-height: 30vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-top: .3vh;
+    height: 90%;
+}
+
+.profilePicContainer {
+    height: 5vw;
+    height: 65px;
+    width: 20%;
+    display: flex;
+    margin-top: .3vh;
+    padding-bottom: .7vh;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.profileButton{
+    height: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.profilePic {
+    height: 100%;
+}
+
+#expand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0px;
+}
+
+.expandIcon {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    height: 70%;
+}
+
+.profileButton:hover {
+    transform: scale(1.1);
+    /*border-color: blue;*/
+}
+
+.profileChoice::-webkit-scrollbar {
+    width: 3px;
+    height: 400px;
+    background-color: var(--quaternary); /* or add it to the track */
+}
+
+/* Add a thumb */
+.profileChoice::-webkit-scrollbar-thumb {
+    background: var(--secondary);
+}
