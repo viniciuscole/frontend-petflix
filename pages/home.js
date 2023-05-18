@@ -5,8 +5,12 @@ import { Footer } from "@/components/Footer"
 import { FilmCard } from "@/components/FilmCard"
 
 import exampleImg from "@/assets/exampleImg.png"
+import { api } from "@/services/api"
+import { headers } from "@/next.config"
+import { getToken } from "@/services/cookies"
 
 function Home({ nextFilms, watchedFilms }) {
+
     return (
         <div className={styles.home}>
             <Header />
@@ -27,9 +31,9 @@ function Home({ nextFilms, watchedFilms }) {
                                     cardImage={film.cardImage}
                                     imdbId={film.imdbId}
                                     filmViews={film.filmViews}
-                                    filmRating={film.filmRating}
-                                    filmLikes={film.filmLikes}
-                                    filmDislikes={film.filmDislikes}
+                                    filmRating={film.rating}
+                                    filmLikes={film.likes}
+                                    filmDislikes={film.dislikes}
                                     isAdmin={true} //para testar só. isso tem q vir do backend
                                     
                                 />
@@ -46,16 +50,17 @@ function Home({ nextFilms, watchedFilms }) {
                     </section>
                     <section className={styles.nextFilms}>
                         {nextFilms.map((film, index) => {
+                            console.log(film)
                             return (
                                 <FilmCard
                                     key={index}
                                     wasWatched={film.wasWatched}
-                                    cardImage={film.cardImage}
+                                    cardImage={film.poster}
                                     imdbId={film.imdbId}
-                                    filmViews={film.filmViews}
-                                    filmRating={film.filmRating}
-                                    filmLikes={film.filmLikes}
-                                    filmDislikes={film.filmDislikes}
+                                    // filmViews={10} revisar depois
+                                    filmRating={film.rating}
+                                    filmLikes={film.likes}
+                                    filmDislikes={film.dislikes}
                                     isAdmin={true}
                                 />
                             )
@@ -68,8 +73,22 @@ function Home({ nextFilms, watchedFilms }) {
     )
 }
 
-export async function getServerSideProps() {
-    const authorization = "123"
+export async function getServerSideProps(context) {
+    const authorization = context.req.cookies["petflix_token"]
+
+
+    try {
+        await api.get("/api/user",  {headers: {
+            'Authorization': authorization
+        }})
+    } catch (err) {
+        return {
+            redirect: {
+                destination: "/login",
+                permanent: false
+            }
+        }
+    }
 
     const nextFilms = await requestSuggestedMovies(authorization)
     const watchedFilms = await requestWatchedMovies(authorization)
@@ -83,30 +102,30 @@ export async function getServerSideProps() {
 }
 
 const requestWatchedMovies = async (authorization) => {
-    return [
-        {
-            wasWatched: true,
-            imdbId: 123,
-            cardImage: exampleImg,
-            filmViews: 7,
-            filmRating: 3.2,
-            filmLikes: 7,
-            filmDislikes: 2,
-        },
-    ]
+    let response;
+
+    try {
+        response = await api.get("/api/movie/watched", {headers: {
+            'Authorization': authorization
+        }})
+    } catch (err) {
+        
+    }
+
+    return response.data
 }
 const requestSuggestedMovies = async (authorization) => {
-    return [
-        {
-            wasWatched: false,
-            imdbId: 123,
-            cardImage: exampleImg,
-            filmViews: 7,
-            filmRating: 3.2,
-            filmLikes: 7,
-            filmDislikes: 2,
-        },
-    ]
+    let response;
+
+    try {
+        response = await api.get("/api/movie/suggested", {headers: {
+            'Authorization': authorization
+        }})
+    } catch (err) {
+        console.log(err)
+    }
+
+    return response.data
 }
 
 export default Home

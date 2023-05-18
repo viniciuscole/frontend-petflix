@@ -169,7 +169,7 @@ export function FilmCard({
 
     const card = (
         <div className={styles.filmCard} onClick={handleClick} onMouseEnter={handleHoverInAdmin} onMouseLeave={handleHoverOutAdmin}>
-            <Image className={styles.filmImage} src={cardImage} alt={filmTitle + " foto de capa"}  />
+            <Image className={styles.filmImage} width={100} height={100} src={cardImage} alt={filmTitle + " foto de capa"}  />
             {isHoveredAdmin && wasWatched && <Image className={styles.adminButton} src={removeFilmIcon} alt="" />}
             {isHoveredAdmin && !wasWatched && <Image className={styles.adminButton} src={addFilmIcon} alt="" />}
             <section

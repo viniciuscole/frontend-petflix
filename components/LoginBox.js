@@ -62,17 +62,15 @@ export function LoginBox(){
 
                     <button id={styles.button} onClick={handleLogin}>LOGIN</button>
 
-                    <a href={'./home'}id={styles.signUp}>
+                
+                    <a href={'./signup'}id={styles.signUp}>
                         <div id={styles.imgSignUp}></div>
                         SIGN UP
                     </a>
-                
                 </form>
-
+                
                 <div className={styles.circle}>
-
                     <div id={styles.bottomCircle}></div>
-
                 </div>
 
             </div>
