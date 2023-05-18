@@ -25,7 +25,7 @@ export function LoginBox(){
                 
                 <form className={styles.form}>
                 
-                    <input type="text" id={styles.email} name="Email" placeholder="EMAIL"  autocomplete="off"></input>
+                    <input type="text" id={styles.email} name="Email" placeholder="EMAIL"  autocomplete="off" pattern=".+@gmail.com"></input>
                     <input type="password" id={styles.password} name="Password" placeholder="PASSWORD"  autocomplete="off"></input>
 
                     <a href={'./home'}id={styles.forgotPassword}>
