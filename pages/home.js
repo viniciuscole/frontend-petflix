@@ -6,10 +6,10 @@ import { FilmCard } from "@/components/FilmCard"
 
 import { api } from "@/services/api"
 
-function Home({ nextFilms, watchedFilms, isAdmin, authorization }) {
+function Home({ nextFilms, watchedFilms, isAdmin, authorization, profilePic }) {
     return (
         <div className={styles.home}>
-            <Header />
+            <Header isAdmin={isAdmin} profilePic={profilePic} />
             <div className={styles.homeMain}>
                 <div className={styles.watchedFilmsContainer}>
                     <section className={styles.watchedFilmsText}>
@@ -89,7 +89,10 @@ export async function getServerSideProps(context) {
     }
 
     const isAdmin = response.data.user.role === "ADMIN"
-
+    const profilePic =
+        "http://200.137.66.9/public/avatar/" +
+        response.data.user.profilePic +
+        ".png"
     const nextFilms = await requestSuggestedMovies(authorization)
     const watchedFilms = await requestWatchedMovies(authorization)
 
@@ -99,6 +102,7 @@ export async function getServerSideProps(context) {
             watchedFilms,
             isAdmin,
             authorization,
+            profilePic,
         },
     }
 }
@@ -112,7 +116,9 @@ const requestWatchedMovies = async (authorization) => {
                 Authorization: authorization,
             },
         })
-    } catch (err) {}
+    } catch (err) {
+        console.log(err)
+    }
 
     return response.data
 }
@@ -125,7 +131,9 @@ const requestSuggestedMovies = async (authorization) => {
                 Authorization: authorization,
             },
         })
-    } catch (err) {}
+    } catch (err) {
+        console.log(err)
+    }
 
     return response.data
 }

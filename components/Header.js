@@ -1,7 +1,7 @@
+import styles from "../styles/components/Header.module.css"
 import Image from "next/image"
 import Link from "next/link"
-
-import styles from "../styles/components/Header.module.css"
+import { useRouter } from "next/router"
 
 import { SearchBar } from "./SearchBar"
 
@@ -9,45 +9,15 @@ import logoImg from "../assets/logo.png"
 import adminIcon from "../assets/adminIcon.png"
 import sairIcon from "../assets/sairIcon.png"
 
-import { api } from "@/services/api"
-import { getToken, destroyToken } from "@/services/cookies"
-import { useState } from "react"
-import { useRouter } from "next/router"
+import { destroyToken } from "@/services/cookies"
 
-export function Header() {
-    const [profilePic, setProfilePic] = useState("")
-    const [isAdmin, setIsAdmin] = useState(false)
-
+export function Header({ profilePic, isAdmin }) {
     const router = useRouter()
-
-    const requestReadUser = async () => {
-        const authorization = getToken()
-        let response
-
-        try {
-            response = await api.get("/api/user", {
-                headers: {
-                    Authorization: authorization,
-                },
-            })
-        } catch (err) {
-            router.push("/login")
-        }
-
-        setIsAdmin(response.data.user.role === "ADMIN")
-        setProfilePic(
-            "http://200.137.66.9/public/avatar/" +
-                response.data.user.profilePic +
-                ".png"
-        )
-    }
 
     const leave = () => {
         destroyToken()
         router.push("/login")
     }
-
-    requestReadUser()
 
     return (
         <header className={styles.header}>
@@ -56,11 +26,11 @@ export function Header() {
                 <Link href={"/home"}>
                     <li>HOME</li>
                 </Link>
-                <Link href={"/ranking"}>
-                    <li>RANKINGS</li>
+                <Link href={"/"}>
+                    <li>RANKING</li>
                 </Link>
-                <Link href={"/mymovies"}>
-                    <li>MY FILMS</li>
+                <Link href={"/"}>
+                    <li>MY MOVIES/TV SERIES</li>
                 </Link>
                 <Link
                     href={"/users"}

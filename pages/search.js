@@ -15,18 +15,19 @@ function Search({
     totalResults,
     authorization,
     isAdmin,
+    profilePic,
 }) {
     if (totalResults != 0) {
         const amountPages = Math.ceil(totalResults / 10)
         return (
             <div className={styles.search}>
-                <Header />
+                <Header isAdmin={isAdmin} profilePic={profilePic} />
                 <div className={styles.searchMain}>
                     <div className={styles.foundFilmsContainer}>
                         <section className={styles.foundFilmsText}>
-                            <p>MOVIES FOUND FOR "{query}"</p>
+                            <p>MOVIES/TV SERIES FOUND FOR "{query}"</p>
                             <p className={styles.qtdFoundFilmsText}>
-                                {totalResults} FILMS/SERIES
+                                {totalResults} RESULTS
                             </p>
                         </section>
                         <section className={styles.foundFilms}>
@@ -48,14 +49,6 @@ function Search({
                             })}
                         </section>
                     </div>
-                    <div>
-                        <SearchPage
-                            min={1}
-                            max={amountPages}
-                            initialValue={page}
-                            query={query}
-                        />
-                    </div>
                 </div>
                 <Footer />
             </div>
@@ -63,7 +56,7 @@ function Search({
     }
     return (
         <div className={styles.search}>
-            <Header />
+            <Header isAdmin={isAdmin} profilePic={profilePic} />
             <div className={styles.notFoundMain}>
                 <Image
                     src="/notFound.png"
@@ -100,6 +93,10 @@ export async function getServerSideProps(context) {
     }
 
     const isAdmin = response.data.user.role === "ADMIN"
+    const profilePic =
+        "http://200.137.66.9/public/avatar/" +
+        response.data.user.profilePic +
+        ".png"
     const query = context.query.query
     const page = parseInt(context.query.page)
 
@@ -126,6 +123,7 @@ export async function getServerSideProps(context) {
             totalResults,
             authorization,
             isAdmin,
+            profilePic,
         },
     }
 }
