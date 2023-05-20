@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import ReactDOM from "react-dom"
 
 import styles from "@/styles/components/FilmCard.module.css"
@@ -16,11 +16,10 @@ import emptyStar from "@/assets/emptyStar.png"
 import removeFilmIcon from "@/assets/removeFilmIcon.png"
 import addFilmIcon from "@/assets/addFilmIcon.png"
 
-import exempleProfilePic from "@/assets/exempleProfilePic.png"
-
-// pegar dados da api
+import { api } from "@/services/api"
 
 export function FilmCard({
+    authorization,
     wasWatched,
     imdbId,
     cardImage,
@@ -30,6 +29,8 @@ export function FilmCard({
     filmDislikes,
     isAdmin,
 }) {
+    const [likes, setLikes] = useState(filmLikes)
+    const [dislikes, setDislikes] = useState(filmDislikes)
     const [isExpanded, setIsExpanded] = useState(false)
     const [comment, setComment] = useState("")
     const [rating, setRating] = useState(0)
@@ -52,37 +53,95 @@ export function FilmCard({
     const [filmDescription, setFilmDescription] = useState("")
     const [evaluations, setEvaluations] = useState([])
 
-    const authorization = "123"
-
     const requestGetMovie = async (authorization, imdbId) => {
-        let title = "gato de botas"
-        let year = "2023"
-        let genre = "pica"
-        let plot = "puss in boots pica pra carai"
-        let evaluations = [
-            {
-                profilePic: exempleProfilePic,
-                username: "JOÃOZINHO PIPOCA",
-                evaluation:
-                    "Achei bem meia boca, mas é bom até, mais ou menos.",
-                rating: 3,
-                watchedOn: "6",
-            },
-        ]
+        let response
+        try {
+            response = await api.get("/api/movie?imdbId=" + imdbId, {
+                headers: {
+                    Authorization: authorization,
+                },
+            })
+        } catch (err) {
+            return {
+                redirect: {
+                    destination: "/login",
+                    permanent: false,
+                },
+            }
+        }
 
-        setFilmTitle(title)
-        setFilmYear(year)
-        setFilmGenres(genre)
-        setFilmDescription(plot)
+        if (response.data.likeStatus == "liked") {
+            setHasLiked(true)
+        } else if (response.data.likeStatus == "disliked") {
+            setHasDisliked(true)
+        }
+
+        setFilmTitle(response.data.title)
+        setFilmYear(response.data.year)
+        setFilmGenres(response.data.genre)
+        setFilmDescription(response.data.plot)
+
+        const evaluations = []
+        for (let i = 0; i < response.data.evaluations.length; i++) {
+            const evaluation = {
+                username: response.data.evaluations[i].user.name,
+                profilePic:
+                    "http://200.137.66.9/public/avatar/" +
+                    response.data.evaluations[i].user.profilePic +
+                    ".png",
+                watchedOn: response.data.evaluations[i].stream,
+                rating: response.data.evaluations[i].rating,
+                evaluation: response.data.evaluations[i].comment,
+            }
+
+            evaluations.push(evaluation)
+        }
         setEvaluations(evaluations)
     }
 
     const requestReadUser = async (authorization) => {
-        let name = "EU"
-        let profilePic = exempleProfilePic
+        let response
+        try {
+            response = await api.get("/api/user", {
+                headers: {
+                    Authorization: authorization,
+                },
+            })
+        } catch (err) {
+            return {
+                redirect: {
+                    destination: "/login",
+                    permanent: false,
+                },
+            }
+        }
 
-        setUsername(name)
-        setProfilePic(profilePic)
+        setUsername(response.data.user.name)
+        setProfilePic(
+            "http://200.137.66.9/public/avatar/" +
+                response.data.user.profilePic +
+                ".png"
+        )
+    }
+
+    const requestLike = async (authorization, imdbId) => {
+        try {
+            await api.put("/api/react/like?imdbId=" + imdbId, {
+                headers: {
+                    Authorization: authorization,
+                },
+            })
+        } catch (err) {}
+    }
+
+    const requestDislike = async (authorization, imdbId) => {
+        try {
+            await api.put("/api/react/dislike?imdbId=" + imdbId, {
+                headers: {
+                    Authorization: authorization,
+                },
+            })
+        } catch (err) {}
     }
 
     const handleClick = async () => {
@@ -135,43 +194,84 @@ export function FilmCard({
         setWatchedOn(0)
     }
 
-    function handleLike() {
+    async function handleLike() {
         if (!hasLiked) {
             setHasLiked(true)
-            setHasDisliked(false)
+            setLikes(likes + 1)
         } else {
             setHasLiked(false)
+            setLikes(likes - 1)
         }
-        // enviar pra api
+
+        if (hasDisliked) {
+            setHasDisliked(false)
+            setDislikes(dislikes - 1)
+            await requestDislike(authorization, imdbId)
+        }
+
+        await requestLike(authorization, imdbId)
     }
 
-    function handleDislike() {
+    async function handleDislike() {
+        await requestDislike(authorization, imdbId)
+
         if (!hasDisliked) {
             setHasDisliked(true)
-            setHasLiked(false)
+            setDislikes(dislikes + 1)
         } else {
             setHasDisliked(false)
+            setDislikes(dislikes - 1)
         }
-        // enviar pra api
+
+        if (hasLiked) {
+            setHasLiked(false)
+            setLikes(likes - 1)
+            await requestLike(authorization, imdbId)
+        }
+
+        await requestDislike(authorization, imdbId)
     }
 
-    function handleHoverInAdmin () {
+    function handleHoverInAdmin() {
         if (isAdmin) {
             setIsHoveredAdmin(true)
         }
     }
 
-    function handleHoverOutAdmin () {
+    function handleHoverOutAdmin() {
         if (isAdmin) {
             setIsHoveredAdmin(false)
         }
     }
 
     const card = (
-        <div className={styles.filmCard} onClick={handleClick} onMouseEnter={handleHoverInAdmin} onMouseLeave={handleHoverOutAdmin}>
-            <Image className={styles.filmImage} width={100} height={100} src={cardImage} alt={filmTitle + " foto de capa"}  />
-            {isHoveredAdmin && wasWatched && <Image className={styles.adminButton} src={removeFilmIcon} alt="" />}
-            {isHoveredAdmin && !wasWatched && <Image className={styles.adminButton} src={addFilmIcon} alt="" />}
+        <div
+            className={styles.filmCard}
+            onClick={handleClick}
+            onMouseEnter={handleHoverInAdmin}
+            onMouseLeave={handleHoverOutAdmin}
+        >
+            <Image
+                className={styles.filmImage}
+                width={300}
+                height={445}
+                src={cardImage}
+                alt={filmTitle + " foto de capa"}
+            />
+            {isHoveredAdmin && wasWatched && (
+                <Image
+                    className={styles.adminButton}
+                    src={removeFilmIcon}
+                    alt=""
+                />
+            )}
+            {isHoveredAdmin && !wasWatched && (
+                <Image
+                    className={styles.adminButton}
+                    src={addFilmIcon}
+                    alt=""
+                />
+            )}
             <section
                 className={styles.watchedFilmsStats}
                 style={wasWatched ? {} : { display: "none" }}
@@ -189,7 +289,7 @@ export function FilmCard({
                 style={wasWatched ? { display: "none" } : {}}
             >
                 <Image src={likeIcon} alt="ícone like" />
-                <p>{filmLikes - filmDislikes}</p>
+                <p>{likes - dislikes}</p>
                 <Image src={dislikeIcon} alt="ícone dislike" />
             </section>
         </div>
@@ -241,7 +341,8 @@ export function FilmCard({
     return (
         <>
             {card}
-            {isExpanded && !isAdmin &&
+            {isExpanded &&
+                !isAdmin &&
                 ReactDOM.createPortal(
                     <div className={styles.cardFilmExpanded}>
                         <div className={styles.cardFilmContent}>
@@ -254,6 +355,8 @@ export function FilmCard({
                                 />
                                 <Image
                                     src={cardImage}
+                                    width={300}
+                                    height={445}
                                     alt={filmTitle + " foto de capa"}
                                     className={styles.cardImg}
                                     priority
@@ -290,7 +393,7 @@ export function FilmCard({
                                             />
                                         </p>
                                         <p>
-                                            {filmLikes}{" "}
+                                            {likes}{" "}
                                             <Image
                                                 onClick={handleLike}
                                                 style={
@@ -307,7 +410,7 @@ export function FilmCard({
                                             />
                                         </p>
                                         <p>
-                                            {filmDislikes}{" "}
+                                            {dislikes}{" "}
                                             <Image
                                                 onClick={handleDislike}
                                                 className={styles.dislikeIcon}

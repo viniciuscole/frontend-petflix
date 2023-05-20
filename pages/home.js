@@ -4,22 +4,18 @@ import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { FilmCard } from "@/components/FilmCard"
 
-import exampleImg from "@/assets/exampleImg.png"
 import { api } from "@/services/api"
-import { headers } from "@/next.config"
-import { getToken } from "@/services/cookies"
 
-function Home({ nextFilms, watchedFilms }) {
-
+function Home({ nextFilms, watchedFilms, isAdmin, authorization }) {
     return (
         <div className={styles.home}>
             <Header />
             <div className={styles.homeMain}>
                 <div className={styles.watchedFilmsContainer}>
                     <section className={styles.watchedFilmsText}>
-                        <p>LAST FILMS</p>
+                        <p>WATCHED FILMS</p>
                         <p className={styles.qtdWatchedFilmsText}>
-                            {watchedFilms.length} FILMS/SERIES
+                            {watchedFilms.length} MOVIES/TV SERIES
                         </p>
                     </section>
                     <section className={styles.watchedFilms}>
@@ -27,15 +23,15 @@ function Home({ nextFilms, watchedFilms }) {
                             return (
                                 <FilmCard
                                     key={index}
+                                    authorization={authorization}
                                     wasWatched={film.wasWatched}
-                                    cardImage={film.cardImage}
+                                    cardImage={film.poster}
                                     imdbId={film.imdbId}
-                                    filmViews={film.filmViews}
+                                    filmViews={film.evaluations}
                                     filmRating={film.rating}
                                     filmLikes={film.likes}
                                     filmDislikes={film.dislikes}
-                                    isAdmin={true} //para testar só. isso tem q vir do backend
-                                    
+                                    isAdmin={isAdmin}
                                 />
                             )
                         })}
@@ -43,25 +39,25 @@ function Home({ nextFilms, watchedFilms }) {
                 </div>
                 <div className={styles.nextFilmsContainer}>
                     <section className={styles.nextFilmsText}>
-                        <p>NEXT FILMS</p>
+                        <p>SUGGESTED FILMS</p>
                         <p className={styles.qtdNextFilmsText}>
-                            {nextFilms.length} FILMS/SERIES
+                            {nextFilms.length} MOVIES/TV SERIES
                         </p>
                     </section>
                     <section className={styles.nextFilms}>
                         {nextFilms.map((film, index) => {
-                            console.log(film)
                             return (
                                 <FilmCard
                                     key={index}
+                                    authorization={authorization}
                                     wasWatched={film.wasWatched}
                                     cardImage={film.poster}
                                     imdbId={film.imdbId}
-                                    // filmViews={10} revisar depois
+                                    filmViews={film.evaluations}
                                     filmRating={film.rating}
                                     filmLikes={film.likes}
                                     filmDislikes={film.dislikes}
-                                    isAdmin={true}
+                                    isAdmin={isAdmin}
                                 />
                             )
                         })}
@@ -75,20 +71,24 @@ function Home({ nextFilms, watchedFilms }) {
 
 export async function getServerSideProps(context) {
     const authorization = context.req.cookies["petflix_token"]
-
+    let response
 
     try {
-        await api.get("/api/user",  {headers: {
-            'Authorization': authorization
-        }})
+        response = await api.get("/api/user", {
+            headers: {
+                Authorization: authorization,
+            },
+        })
     } catch (err) {
         return {
             redirect: {
                 destination: "/login",
-                permanent: false
-            }
+                permanent: false,
+            },
         }
     }
+
+    const isAdmin = response.data.user.role === "ADMIN"
 
     const nextFilms = await requestSuggestedMovies(authorization)
     const watchedFilms = await requestWatchedMovies(authorization)
@@ -97,33 +97,35 @@ export async function getServerSideProps(context) {
         props: {
             nextFilms,
             watchedFilms,
+            isAdmin,
+            authorization,
         },
     }
 }
 
 const requestWatchedMovies = async (authorization) => {
-    let response;
+    let response
 
     try {
-        response = await api.get("/api/movie/watched", {headers: {
-            'Authorization': authorization
-        }})
-    } catch (err) {
-        
-    }
+        response = await api.get("/api/movie/watched", {
+            headers: {
+                Authorization: authorization,
+            },
+        })
+    } catch (err) {}
 
     return response.data
 }
 const requestSuggestedMovies = async (authorization) => {
-    let response;
+    let response
 
     try {
-        response = await api.get("/api/movie/suggested", {headers: {
-            'Authorization': authorization
-        }})
-    } catch (err) {
-        console.log(err)
-    }
+        response = await api.get("/api/movie/suggested", {
+            headers: {
+                Authorization: authorization,
+            },
+        })
+    } catch (err) {}
 
     return response.data
 }

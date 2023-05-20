@@ -1,342 +1,342 @@
 .filmCard {
-  height: 300px;
-  width: auto;
-  position: relative;
+    height: 300px;
+    width: auto;
+    position: relative;
 }
 
 .filmCard:hover {
-  opacity: 40%;
-  transition: opacity 0.2s;
+    opacity: 40%;
+    transition: opacity 0.2s;
 }
 
 .filmCard::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: linear-gradient(to bottom, transparent, black);
-  filter: blur(10px);
-  z-index: 1;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent, black);
+    filter: blur(10px);
+    z-index: 1;
 }
 
 .filmImage {
-  height: 100%;
-  width: auto;
-  object-fit: cover;
-  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 1) inset;
+    height: 300px;
+    width: 202.25px;
+    object-fit: cover;
+    box-shadow: 0 0 0 1000px rgba(0, 0, 0, 1) inset;
 }
 
 .adminButton {
-  height: 100px;
-  width: 100px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .watchedFilmsStats,
 .nextFilmsStats {
-  position: absolute;
-  bottom: 10px;
-  right: 15px;
-  display: flex;
-  align-items: center;
-  z-index: 2;
-  gap: 15px;
-  color: var(--primary);
-  font-size: 1rem;
-  font-weight: 600;
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    gap: 15px;
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .watchedFilmsStats img,
 .nextFilmsStats img {
-  height: 15px;
-  width: auto;
+    height: 15px;
+    width: auto;
 }
 
 .watchedFilmsStats p {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .closeButton {
-  position: absolute;
-  left: 15px;
-  top: 15px;
-  z-index: 2;
-  cursor: pointer;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    z-index: 2;
+    cursor: pointer;
 }
 
 .cardFilmExpanded {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 999;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
 }
 
 .cardFilmContent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  backdrop-filter: blur(10px);
-  display: flex;
-  justify-content: center;
-  height: auto;
-  width: auto;
-  background-color: #0a0a0a;
-  min-width: 1000px;
-  min-height: 500px;
-  border-radius: 5px;
-  gap: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    height: auto;
+    width: auto;
+    background-color: #0a0a0a;
+    min-width: 1000px;
+    min-height: 500px;
+    border-radius: 5px;
+    gap: 50px;
 }
 
 .leftPart {
-  position: relative;
+    position: relative;
 }
 
 .leftPart .cardImg {
-  height: 100%;
-  width: auto;
-  object-fit: cover;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .filmStats {
-  color: var(--primary);
-  height: 100%;
-  width: 100%;
-  padding: 50px;
-  padding-top: 20px;
-  display: flex;
-  flex-direction: column;
+    color: var(--primary);
+    height: 100%;
+    width: 100%;
+    padding: 50px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .headerStats {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
 }
 
 .detailedInformation {
-  color: var(--quinary);
-  font-size: 0.8rem;
+    color: var(--quinary);
+    font-size: 0.8rem;
 }
 
 .ratingStats {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .ratingStats p {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .description {
-  margin-top: 15px;
-  font-size: 11px;
-  font-weight: 300;
+    margin-top: 15px;
+    font-size: 11px;
+    font-weight: 300;
 }
 
 .evaluations {
-  margin-top: 15px;
-  width: 400px;
-  align-self: center;
+    margin-top: 15px;
+    width: 400px;
+    align-self: center;
 }
 
 .evaluationsHeader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
 
 .evaluationsHeader h2 {
-  font-size: 1rem;
-  font-weight: 600;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .evaluationsHeader p {
-  font-size: 0.6rem;
-  font-weight: 500;
-  color: var(--quinary);
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: var(--quinary);
 }
 
 .evaluationsContent {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  height: 150px;
-  overflow-y: auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    height: 150px;
+    overflow-y: auto;
 }
 .evaluationsContent::-webkit-scrollbar {
-  width: 4px;
-  background: var(--quinary);
-  border-radius: 10px;
+    width: 4px;
+    background: var(--quinary);
+    border-radius: 10px;
 }
 .evaluationsContent::-webkit-scrollbar-thumb {
-  background: var(--secondary);
-  border-radius: 10px;
+    background: var(--secondary);
+    border-radius: 10px;
 }
 
 .postEvaluation {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .postEvaluation textarea {
-  height: 65px;
-  width: 100%;
-  border: none;
-  border-radius: 5px;
-  padding: 8px;
-  font-size: 0.8rem;
-  font-weight: 300;
-  color: var(--quinary);
-  resize: none;
-  background-color: var(--primary);
+    height: 65px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--quinary);
+    resize: none;
+    background-color: var(--primary);
 }
 
 .evaluationOptions {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .evaluationDetails {
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
 }
 
 .evaluationDetails p {
-  font-size: 0.8rem;
-  font-weight: 300;
-  color: var(--quinary);
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--quinary);
 }
 
 .evaluationDetails select {
-  background-color: var(--quinary);
-  color: var(--primary);
-  padding: 5px;
-  border-radius: 5px;
-  border: none;
+    background-color: var(--quinary);
+    color: var(--primary);
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
 }
 
 .evaluationDetails select option {
-  border: none;
+    border: none;
 }
 
 .evaluationDetails select:focus {
-  outline: none;
+    outline: none;
 }
 
 .evaluationDetails select:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .evaluationDetails div:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .evaluationDetails button {
-  background-color: var(--secondary);
-  color: var(--primary);
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  font-size: 0.8rem;
-  font-weight: 300;
+    background-color: var(--secondary);
+    color: var(--primary);
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 300;
 }
 
 .evaluationDetails button:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .submitBox {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
 }
 
 .submitBoxContent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  backdrop-filter: blur(10px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: auto;
-  width: auto;
-  background-color: #0a0a0a;
-  border-radius: 15px;
-  align-items: center;
-  gap: 15px;
-  padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    width: auto;
+    background-color: #0a0a0a;
+    border-radius: 15px;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
 }
 
 .submitBoxCloseButton {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  z-index: 2;
-  cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    z-index: 2;
+    cursor: pointer;
 }
 
 .submitBoxContent h1 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--primary);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
 }
 
 .submitBoxContent h2 {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--quinary);
-  align-self: flex-start;
-  margin-bottom: 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--quinary);
+    align-self: flex-start;
+    margin-bottom: 10px;
 }
 
 .submitBoxContent button {
-  background-color: var(--secondary);
-  color: var(--primary);
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  font-size: 0.8rem;
-  font-weight: 300;
+    background-color: var(--secondary);
+    color: var(--primary);
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 300;
 }
 
 .submitBoxContent button:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .likeIcon:hover,
 .dislikeIcon:hover {
-  cursor: pointer;
-  transform: scale(1.4);
+    cursor: pointer;
+    transform: scale(1.4);
 }
