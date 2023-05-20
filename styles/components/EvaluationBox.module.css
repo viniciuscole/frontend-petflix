@@ -1,4 +1,4 @@
-.evaluation{
+.evaluation {
     background-color: transparent;
     border: 0;
     padding: 0;
@@ -8,19 +8,19 @@
     align-items: center;
     gap: 10px;
 }
-.profilePic{
-    height: 100%;
+.profilePic {
+    height: 60px;
     border-radius: 50%;
     width: 60px;
     display: flex;
     align-items: center;
-    
 }
-.profilePic img{
-    width: 100%;
+.profilePic img {
+    height: 60px;
+    width: 60px;
     border-radius: 50%;
 }
-.evaluationContent{
+.evaluationContent {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -28,35 +28,35 @@
     width: 300px;
     gap: 5px;
 }
-.evaluationContent h3{
+.evaluationContent h3 {
     font-size: 0.8rem;
     font-weight: 500;
     color: #fff;
 }
-.evaluationContent p{
+.evaluationContent p {
     font-size: 0.7rem;
     font-weight: 400;
     color: #fff;
 }
-.detailedEvaluationInfo{
+.detailedEvaluationInfo {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.evaluationRating{
+.evaluationRating {
     display: flex;
     gap: 5px;
 }
-.watchedOn{
+.watchedOn {
     color: var(--quinary);
     font-size: 0.6rem;
 }
-.watchedOn p{
+.watchedOn p {
     display: flex;
     gap: 5px;
     align-items: center;
 }
-.watchedOnComponent{
+.watchedOnComponent {
     color: var(--primary);
     font-size: 0.6rem;
     font-weight: 500;

@@ -1,14 +1,12 @@
-import styles from '@/styles/pages/Rank.module.css'
+import styles from "@/styles/pages/Rank.module.css"
 
-import { useState } from 'react'
+import { Header } from "@/components/Header"
+import { Footer } from "@/components/Footer"
 
-import { Header } from '@/components/Header'
-import { Footer } from '@/components/Footer'
-
-function Ranking(){
-    return(
+function Ranking() {
+    return (
         <div className={styles.rank}>
-            <Header/>
+            <Header />
             <div className={styles.rankContent}>
                 <div className={styles.rankConteiner}>
                     <section className={styles.rankConteinerText}>
@@ -92,7 +90,7 @@ function Ranking(){
                     </section>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     )
 }

@@ -1,15 +1,21 @@
-import Image from "next/image"
-
 import styles from "@/styles/pages/Home.module.css"
 
+import Image from "next/image"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { FilmCard } from "@/components/FilmCard"
 import SearchPage from "@/components/SearchPage"
 
-import exampleImg from "@/assets/exampleImg.png"
+import { api } from "@/services/api"
 
-function Search({ foundFilms, query, page, totalResults }) {
+function Search({
+    foundFilms,
+    query,
+    page,
+    totalResults,
+    authorization,
+    isAdmin,
+}) {
     if (totalResults != 0) {
         const amountPages = Math.ceil(totalResults / 10)
         return (
@@ -28,13 +34,15 @@ function Search({ foundFilms, query, page, totalResults }) {
                                 return (
                                     <FilmCard
                                         key={index}
+                                        authorization={authorization}
                                         wasWatched={film.wasWatched}
-                                        cardImage={film.cardImage}
+                                        cardImage={film.poster}
                                         imdbId={film.imdbId}
-                                        filmViews={film.filmViews}
-                                        filmRating={film.filmRating}
-                                        filmLikes={film.filmLikes}
-                                        filmDislikes={film.filmDislikes}
+                                        filmViews={film.evaluations}
+                                        filmRating={film.rating}
+                                        filmLikes={film.likes}
+                                        filmDislikes={film.dislikes}
+                                        isAdmin={isAdmin}
                                     />
                                 )
                             })}
@@ -73,10 +81,36 @@ function Search({ foundFilms, query, page, totalResults }) {
 }
 
 export async function getServerSideProps(context) {
+    const authorization = context.req.cookies["petflix_token"]
+
+    let response
+    try {
+        response = await api.get("/api/user", {
+            headers: {
+                Authorization: authorization,
+            },
+        })
+    } catch (err) {
+        return {
+            redirect: {
+                destination: "/login",
+                permanent: false,
+            },
+        }
+    }
+
+    const isAdmin = response.data.user.role === "ADMIN"
     const query = context.query.query
     const page = parseInt(context.query.page)
 
-    const authorization = "123"
+    if (query == undefined || page == undefined) {
+        return {
+            redirect: {
+                destination: "/home",
+                permanent: false,
+            },
+        }
+    }
 
     const [movies, totalResults] = await requestSearchMovie(
         authorization,
@@ -90,26 +124,36 @@ export async function getServerSideProps(context) {
             query,
             page,
             totalResults,
+            authorization,
+            isAdmin,
         },
     }
 }
 
 const requestSearchMovie = async (authorization, query, page) => {
     let movies = []
-    let totalResults = 25
+    let totalResults = 0
 
-    if (query == "test") totalResults = 0
+    let response
+    try {
+        const data = {
+            page: page,
+            query: query,
+        }
 
-    for (var i = 0; i < 10; i++) {
-        movies.push({
-            wasWatched: true,
-            imdbId: 123,
-            cardImage: exampleImg,
-            filmViews: 7,
-            filmRating: 3.2,
-            filmLikes: 7,
-            filmDislikes: 2,
+        response = await api.post("/api/search", data, {
+            headers: {
+                Authorization: authorization,
+                "Content-Type": "application/json",
+            },
         })
+
+        console.log(response)
+
+        movies = response.data.movies
+        totalResults = response.data.totalResults
+    } catch (err) {
+        console.log(err)
     }
     return [movies, totalResults]
 }
