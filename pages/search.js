@@ -5,6 +5,7 @@ import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { FilmCard } from "@/components/FilmCard"
 import SearchPage from "@/components/SearchPage"
+import { NextPageButton } from "@/components/nextPageButton"
 
 import { api } from "@/services/api"
 
@@ -47,6 +48,7 @@ function Search({
                                     />
                                 )
                             })}
+                            <NextPageButton />
                         </section>
                     </div>
                 </div>
