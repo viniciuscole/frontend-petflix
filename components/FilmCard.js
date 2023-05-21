@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 
 import styles from "@/styles/components/FilmCard.module.css"
@@ -52,6 +52,18 @@ export function FilmCard({
     const [filmGenres, setFilmGenres] = useState("")
     const [filmDescription, setFilmDescription] = useState("")
     const [evaluations, setEvaluations] = useState([])
+
+    useEffect(() => {
+        const handleKeyPress = (event) => {
+            if (event.key === 'Escape') {
+                handleClose();
+            }
+        };
+        document.addEventListener('keydown', handleKeyPress);
+        return () => {
+            document.removeEventListener('keydown', handleKeyPress);
+        };
+    }, []);
 
     const requestGetMovie = async (authorization, imdbId) => {
         let response
@@ -119,8 +131,8 @@ export function FilmCard({
         setUsername(response.data.user.name)
         setProfilePic(
             "http://200.137.66.9/public/avatar/" +
-                response.data.user.profilePic +
-                ".png"
+            response.data.user.profilePic +
+            ".png"
         )
     }
 
@@ -131,7 +143,7 @@ export function FilmCard({
                     Authorization: authorization,
                 },
             })
-        } catch (err) {}
+        } catch (err) { }
     }
 
     const requestDislike = async (authorization, imdbId) => {
@@ -141,7 +153,7 @@ export function FilmCard({
                     Authorization: authorization,
                 },
             })
-        } catch (err) {}
+        } catch (err) { }
     }
 
     const handleClick = async () => {
@@ -250,6 +262,7 @@ export function FilmCard({
             onClick={handleClick}
             onMouseEnter={handleHoverInAdmin}
             onMouseLeave={handleHoverOutAdmin}
+            onPress
         >
             <Image
                 className={styles.filmImage}
@@ -399,9 +412,9 @@ export function FilmCard({
                                                 style={
                                                     hasLiked
                                                         ? {
-                                                              transform:
-                                                                  "scale(1.4)",
-                                                          }
+                                                            transform:
+                                                                "scale(1.4)",
+                                                        }
                                                         : {}
                                                 }
                                                 className={styles.likeIcon}
@@ -417,9 +430,9 @@ export function FilmCard({
                                                 style={
                                                     hasDisliked
                                                         ? {
-                                                              transform:
-                                                                  "scale(1.4)",
-                                                          }
+                                                            transform:
+                                                                "scale(1.4)",
+                                                        }
                                                         : {}
                                                 }
                                                 src={dislikeIcon}
@@ -519,11 +532,11 @@ export function FilmCard({
                                                             onMouseLeave={() =>
                                                                 isFilled
                                                                     ? setHover(
-                                                                          rating
-                                                                      )
+                                                                        rating
+                                                                    )
                                                                     : setHover(
-                                                                          0
-                                                                      )
+                                                                        0
+                                                                    )
                                                             }
                                                             onClick={() =>
                                                                 handleRatingClick(
@@ -532,7 +545,7 @@ export function FilmCard({
                                                             }
                                                         >
                                                             {hover >=
-                                                            index + 1 ? (
+                                                                index + 1 ? (
                                                                 <Image
                                                                     src={
                                                                         fullStar
