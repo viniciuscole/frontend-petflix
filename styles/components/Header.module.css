@@ -1,4 +1,4 @@
-.header{
+.header {
     background-color: transparent;
     padding: 10px 40px;
     display: flex;
@@ -10,7 +10,8 @@
     z-index: 100;
     align-items: center;
 }
-.linksList{
+
+.linksList {
     list-style: none;
     display: flex;
     align-items: center;
@@ -21,24 +22,29 @@
     padding-left: 60px;
     padding-right: 40px;
 }
-.linksList a{
+
+.linksList a {
     text-decoration: none;
     color: var(--primary);
     font-weight: 700;
     font-size: 14px;
 }
 
-.adminDiv{
+.adminDiv {
     display: flex;
     align-items: center;
     gap: 10px;
     color: var(--secondary);
 }
 
-.sairDiv{
+.sairDiv {
     display: flex;
     align-items: center;
     gap: 10px;
     color: var(--tertiary);
+    cursor: pointer;
 }
-    
+
+.sairDiv:hover {
+    transform: translateX(3px);
+}

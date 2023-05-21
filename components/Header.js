@@ -9,10 +9,20 @@ import logoImg from '../assets/logo.png'
 import adminIcon from '../assets/adminIcon.png'
 import sairIcon from '../assets/sairIcon.png'
 import profilePic from '../assets/profilePic.png'
+import { useRouter } from 'next/router'
+import { destroyToken } from '@/services/cookies'
 
 let isAdmin = true; // nao sei como fazer pra saber se é admin ou nn
 
-export function Header(){
+export function Header() {
+
+    const router = useRouter();
+
+
+    const handleLogout = () => {
+        destroyToken();
+        router.push("/")
+    }
 
 
     return (
@@ -28,24 +38,24 @@ export function Header(){
                 <Link href={"/mymovies"}>
                     <li>MY FILMS</li>
                 </Link>
-                <Link href={"/users"} style={isAdmin?{}:{display: 'none'}}>
+                <Link href={"/users"} style={isAdmin ? {} : { display: 'none' }}>
                     <li>USERS</li>
                 </Link>
             </ul>
 
-            <SearchBar/>
+            <SearchBar />
 
-            <div className={styles.adminDiv} style={isAdmin?{}:{display: 'none'}}>
-                <Image src={adminIcon} alt="icone logado como admin"/>
+            <div className={styles.adminDiv} style={isAdmin ? {} : { display: 'none' }}>
+                <Image src={adminIcon} alt="icone logado como admin" />
                 <p>LOGGED AS ADMIN</p>
             </div>
 
-            <div className={styles.sairDiv}>
-                <Image src={sairIcon} alt="ícone de sair"/>
+            <div className={styles.sairDiv} onClick={handleLogout}>
+                <Image src={sairIcon} alt="ícone de sair" />
                 <p>LEAVE</p>
             </div>
 
-            <Image src={profilePic} alt="imagem do perfil"/>
+            <Image src={profilePic} alt="imagem do perfil" />
 
         </header>
     )
