@@ -4,22 +4,38 @@ import Image from "next/image"
 import { Header } from "@/components/Header"
 import { Footer } from "@/components/Footer"
 import { FilmCard } from "@/components/FilmCard"
-import SearchPage from "@/components/SearchPage"
 import { NextPageButton } from "@/components/nextPageButton"
 
 import { api } from "@/services/api"
+import { useState } from "react"
 
 function Search({
-    foundFilms,
+    results,
     query,
-    page,
     totalResults,
     authorization,
     isAdmin,
     profilePic,
 }) {
     if (totalResults != 0) {
+        const [page, setPage] = useState(1)
+        const [foundMovies, setFoundMovies] = useState(results)
         const amountPages = Math.ceil(totalResults / 10)
+
+        const onClickHandle = async () => {
+            if (page + 1 <= amountPages) {
+                const [foundMovies2, totalResults2] = await requestSearchMovie(
+                    authorization,
+                    query,
+                    page + 1
+                )
+                const foundMovies1 = foundMovies.concat(foundMovies2)
+
+                setPage(page + 1)
+                setFoundMovies(foundMovies1)
+            }
+        }
+
         return (
             <div className={styles.search}>
                 <Header isAdmin={isAdmin} profilePic={profilePic} />
@@ -32,7 +48,7 @@ function Search({
                             </p>
                         </section>
                         <section className={styles.foundFilms}>
-                            {foundFilms.map((film, index) => {
+                            {foundMovies.map((film, index) => {
                                 return (
                                     <FilmCard
                                         key={index}
@@ -48,7 +64,9 @@ function Search({
                                     />
                                 )
                             })}
-                            <NextPageButton />
+                            <div>
+                                <NextPageButton onClick={onClickHandle} />
+                            </div>
                         </section>
                     </div>
                 </div>
@@ -100,9 +118,8 @@ export async function getServerSideProps(context) {
         response.data.user.profilePic +
         ".png"
     const query = context.query.query
-    const page = parseInt(context.query.page)
 
-    if (query == undefined || page == undefined) {
+    if (query == undefined) {
         return {
             redirect: {
                 destination: "/home",
@@ -114,14 +131,13 @@ export async function getServerSideProps(context) {
     const [movies, totalResults] = await requestSearchMovie(
         authorization,
         query,
-        page
+        1
     )
 
     return {
         props: {
-            foundFilms: movies,
+            results: movies,
             query,
-            page,
             totalResults,
             authorization,
             isAdmin,
