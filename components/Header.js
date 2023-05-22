@@ -35,10 +35,7 @@ export function Header({ profilePic, isAdmin }) {
                 <Link
                     href={"/users"}
                     style={isAdmin ? {} : { display: "none" }}
-                >
-                <Link href={"/users"} style={isAdmin ? {} : { display: 'none' }}>
-                    <li>USERS</li>
-                </Link>
+                ></Link>
             </ul>
 
             <SearchBar />
