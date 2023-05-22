@@ -43,8 +43,15 @@
     gap: 10px;
     color: var(--tertiary);
     cursor: pointer;
+
 }
 
 .sairDiv:hover {
     transform: translateX(3px);
+}
+
+.img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
 }

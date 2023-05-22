@@ -1,29 +1,23 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from "next/image"
+import Link from "next/link"
 
-import styles from '../styles/components/Header.module.css'
+import styles from "../styles/components/Header.module.css"
 
-import { SearchBar } from './SearchBar'
+import { SearchBar } from "./SearchBar"
 
-import logoImg from '../assets/logo.png'
-import adminIcon from '../assets/adminIcon.png'
-import sairIcon from '../assets/sairIcon.png'
-import profilePic from '../assets/profilePic.png'
-import { useRouter } from 'next/router'
-import { destroyToken } from '@/services/cookies'
+import logoImg from "../assets/logo.png"
+import adminIcon from "../assets/adminIcon.png"
+import sairIcon from "../assets/sairIcon.png"
+import { useRouter } from "next/router"
+import { destroyToken } from "@/services/cookies"
 
-let isAdmin = true; // nao sei como fazer pra saber se é admin ou nn
-
-export function Header() {
-
-    const router = useRouter();
-
+export function Header({ profilePic, isAdmin }) {
+    const router = useRouter()
 
     const handleLogout = () => {
-        destroyToken();
+        destroyToken()
         router.push("/")
     }
-
 
     return (
         <header className={styles.header}>
@@ -38,6 +32,10 @@ export function Header() {
                 <Link href={"/mymovies"}>
                     <li>MY FILMS</li>
                 </Link>
+                <Link
+                    href={"/users"}
+                    style={isAdmin ? {} : { display: "none" }}
+                >
                 <Link href={"/users"} style={isAdmin ? {} : { display: 'none' }}>
                     <li>USERS</li>
                 </Link>
@@ -45,7 +43,10 @@ export function Header() {
 
             <SearchBar />
 
-            <div className={styles.adminDiv} style={isAdmin ? {} : { display: 'none' }}>
+            <div
+                className={styles.adminDiv}
+                style={isAdmin ? {} : { display: "none" }}
+            >
                 <Image src={adminIcon} alt="icone logado como admin" />
                 <p>LOGGED AS ADMIN</p>
             </div>
@@ -55,8 +56,13 @@ export function Header() {
                 <p>LEAVE</p>
             </div>
 
-            <Image src={profilePic} alt="imagem do perfil" />
-
+            <Image
+                className={styles.img}
+                src={profilePic}
+                height={202}
+                width={202}
+                alt="imagem do perfil"
+            />
         </header>
     )
 }
