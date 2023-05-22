@@ -1,22 +1,22 @@
-import styles from "../styles/components/Header.module.css"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/router"
+
+import styles from "../styles/components/Header.module.css"
 
 import { SearchBar } from "./SearchBar"
 
 import logoImg from "../assets/logo.png"
 import adminIcon from "../assets/adminIcon.png"
 import sairIcon from "../assets/sairIcon.png"
-
+import { useRouter } from "next/router"
 import { destroyToken } from "@/services/cookies"
 
 export function Header({ profilePic, isAdmin }) {
     const router = useRouter()
 
-    const leave = () => {
+    const handleLogout = () => {
         destroyToken()
-        router.push("/login")
+        router.push("/")
     }
 
     return (
@@ -26,11 +26,11 @@ export function Header({ profilePic, isAdmin }) {
                 <Link href={"/home"}>
                     <li>HOME</li>
                 </Link>
-                <Link href={"/"}>
-                    <li>RANKING</li>
+                <Link href={"/rankings"}>
+                    <li>RANKINGS</li>
                 </Link>
-                <Link href={"/"}>
-                    <li>MY MOVIES/TV SERIES</li>
+                <Link href={"/mymovies"}>
+                    <li>MY FILMS</li>
                 </Link>
                 <Link
                     href={"/users"}
@@ -50,7 +50,7 @@ export function Header({ profilePic, isAdmin }) {
                 <p>LOGGED AS ADMIN</p>
             </div>
 
-            <div onClick={leave} className={styles.sairDiv}>
+            <div className={styles.sairDiv} onClick={handleLogout}>
                 <Image src={sairIcon} alt="ícone de sair" />
                 <p>LEAVE</p>
             </div>

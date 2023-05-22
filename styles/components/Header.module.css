@@ -10,6 +10,7 @@
     z-index: 100;
     align-items: center;
 }
+
 .linksList {
     list-style: none;
     display: flex;
@@ -21,6 +22,7 @@
     padding-left: 60px;
     padding-right: 40px;
 }
+
 .linksList a {
     text-decoration: none;
     color: var(--primary);
@@ -41,6 +43,10 @@
     gap: 10px;
     color: var(--tertiary);
     cursor: pointer;
+}
+
+.sairDiv:hover {
+    transform: translateX(3px);
 }
 
 .img {
