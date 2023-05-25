@@ -42,7 +42,7 @@ function Movies() {
                                 cardImage={film.cardImage}
                                 imdbId={film.imdbId}
                                 filmViews={film.filmViews}
-                                filmRating={film.filmRating}
+                                filmRating={film.filmRating.toFixed(2)}
                                 filmLikes={film.filmLikes}
                                 filmDislikes={film.filmDislikes}
                             />
@@ -69,7 +69,7 @@ function Movies() {
                                 cardImage={film.cardImage}
                                 imdbId={film.imdbId}
                                 filmViews={film.filmViews}
-                                filmRating={film.filmRating}
+                                filmRating={film.filmRating.toFixed(2)}
                                 filmLikes={film.filmLikes}
                                 filmDislikes={film.filmDislikes}
                                 userRating={3}

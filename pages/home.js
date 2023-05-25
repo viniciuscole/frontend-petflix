@@ -28,7 +28,7 @@ function Home({ nextFilms, watchedFilms, isAdmin, authorization, profilePic }) {
                                     cardImage={film.poster}
                                     imdbId={film.imdbId}
                                     filmViews={film.evaluations}
-                                    filmRating={film.rating}
+                                    filmRating={film.rating.toFixed(2)}
                                     filmLikes={film.likes}
                                     filmDislikes={film.dislikes}
                                     isAdmin={isAdmin}
@@ -54,7 +54,7 @@ function Home({ nextFilms, watchedFilms, isAdmin, authorization, profilePic }) {
                                     cardImage={film.poster}
                                     imdbId={film.imdbId}
                                     filmViews={film.evaluations}
-                                    filmRating={film.rating}
+                                    filmRating={film.rating.toFixed(2)}
                                     filmLikes={film.likes}
                                     filmDislikes={film.dislikes}
                                     isAdmin={isAdmin}

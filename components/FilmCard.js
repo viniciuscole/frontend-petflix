@@ -16,7 +16,18 @@ import emptyStar from "@/assets/emptyStar.png"
 import removeFilmIcon from "@/assets/removeFilmIcon.png"
 import addFilmIcon from "@/assets/addFilmIcon.png"
 
+const movieType = [
+    'NETFLIX',
+    'AMAZON',
+    'HBO',
+    'DISNEY',
+    'STARPLUS',
+    'CLARO',
+    'PIRATEX'
+];
+
 import { api } from "@/services/api"
+import { useRouter } from "next/router"
 
 export function FilmCard({
     authorization,
@@ -29,6 +40,7 @@ export function FilmCard({
     filmDislikes,
     isAdmin,
 }) {
+    const router = useRouter();
     const [likes, setLikes] = useState(filmLikes)
     const [dislikes, setDislikes] = useState(filmDislikes)
     const [isExpanded, setIsExpanded] = useState(false)
@@ -53,16 +65,25 @@ export function FilmCard({
     const [filmDescription, setFilmDescription] = useState("")
     const [evaluations, setEvaluations] = useState([])
 
+    const [currentEvaluation, setCurrentEvaluation] = useState({
+    });
+
     useEffect(() => {
-        const handleKeyPress = (event) => {
-            if (event.key === 'Escape') {
-                handleClose();
-            }
-        };
-        document.addEventListener('keydown', handleKeyPress);
-        return () => {
-            document.removeEventListener('keydown', handleKeyPress);
-        };
+        async function key() {
+            const handleKeyPress = (event) => {
+                if (event.key === 'Escape') {
+                    handleClose();
+                }
+            };
+            document.addEventListener('keydown', handleKeyPress);
+            return () => {
+                document.removeEventListener('keydown', handleKeyPress);
+            };
+        }
+
+
+
+        key();
     }, []);
 
     const requestGetMovie = async (authorization, imdbId) => {
@@ -190,6 +211,22 @@ export function FilmCard({
 
     function handleSubmmitEvaluation(e) {
         e.preventDefault()
+
+        async function fetchData() {
+            try {
+                const response = await api.get("/api/user")
+                //console.log(response.data)
+                response.data.evaluations.forEach((evaluation) => {
+                    if (evaluation.imdbId == imdbId) {
+                        setCurrentEvaluation(evaluation)
+                        setHasSubmited(true);
+                    }
+                })
+            } catch(err) {
+    
+            }
+        }
+        fetchData();
         if (comment.length > 0) {
             setIsEvaluationBoxExpanded(true)
             if (!hasFirstSubmited) setHasFirstSubmited(true)
@@ -197,10 +234,40 @@ export function FilmCard({
         }
     }
 
-    function handleAddComment(e) {
+    async function handleAddComment(e) {
         e.preventDefault()
         handleCloseSubmitBox()
-        console.log(comment, rating, watchedOn)
+        try {
+            const res = await api.post("/api/evaluation", {
+                comment, rating, stream: movieType[watchedOn], imdbId
+            })
+            router.reload(window.location.pathname)
+
+        } catch (err) {
+            console.log(err);
+        }
+        setComment("")
+        setRating(0)
+        setWatchedOn(0)
+    }
+
+    async function handleUpdateComment(e) {
+        e.preventDefault()
+        handleCloseSubmitBox()
+        // console.log(comment, rating, watchedOn)
+        try {
+            const res = await api.put("/api/evaluation", {
+                comment, rating, stream: movieType[watchedOn]
+            }, {
+                params: {
+                    id: currentEvaluation.id
+                }
+            })
+            router.reload(window.location.pathname)
+
+        } catch (err) {
+            console.log(err);
+        }
         setComment("")
         setRating(0)
         setWatchedOn(0)
@@ -327,8 +394,8 @@ export function FilmCard({
                     <EvaluationBox
                         profilePic={profilePic}
                         username={username}
-                        evaluation={comment}
-                        rating={rating}
+                        evaluation={currentEvaluation.comment}
+                        rating={currentEvaluation.rating}
                         watchedOn={watchedOn}
                     />
                 </section>
@@ -343,7 +410,7 @@ export function FilmCard({
                     />
                 </section>
                 {hasSubmited ? (
-                    <button onClick={handleAddComment}>UPDATE</button>
+                    <button onClick={handleUpdateComment}>UPDATE</button>
                 ) : (
                     <button onClick={handleAddComment}>ADD</button>
                 )}

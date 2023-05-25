@@ -26,7 +26,7 @@ export function Header({ profilePic, isAdmin }) {
                 <Link href={"/home"}>
                     <li>HOME</li>
                 </Link>
-                <Link href={"/rankings"}>
+                <Link href={"/ranking"}>
                     <li>RANKINGS</li>
                 </Link>
                 <Link href={"/mymovies"}>
