@@ -1,19 +1,23 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from "next/image"
+import Link from "next/link"
 
-import styles from '../styles/components/Header.module.css'
+import styles from "../styles/components/Header.module.css"
 
-import { SearchBar } from './SearchBar'
+import { SearchBar } from "./SearchBar"
 
-import logoImg from '../assets/logo.png'
-import adminIcon from '../assets/adminIcon.png'
-import sairIcon from '../assets/sairIcon.png'
-import profilePic from '../assets/profilePic.png'
+import logoImg from "../assets/logo.png"
+import adminIcon from "../assets/adminIcon.png"
+import sairIcon from "../assets/sairIcon.png"
+import { useRouter } from "next/router"
+import { destroyToken } from "@/services/cookies"
 
-let isAdmin = true; // nao sei como fazer pra saber se é admin ou nn
+export function Header({ profilePic, isAdmin }) {
+    const router = useRouter()
 
-export function Header(){
-
+    const handleLogout = () => {
+        destroyToken()
+        router.push("/")
+    }
 
     return (
         <header className={styles.header}>
@@ -22,31 +26,40 @@ export function Header(){
                 <Link href={"/home"}>
                     <li>HOME</li>
                 </Link>
-                <Link href={"/rankings"}>
+                <Link href={"/ranking"}>
                     <li>RANKINGS</li>
                 </Link>
                 <Link href={"/mymovies"}>
                     <li>MY FILMS</li>
                 </Link>
-                <Link href={"/users"} style={isAdmin?{}:{display: 'none'}}>
-                    <li>USERS</li>
-                </Link>
+                <Link
+                    href={"/users"}
+                    style={isAdmin ? {} : { display: "none" }}
+                ></Link>
             </ul>
 
-            <SearchBar/>
+            <SearchBar />
 
-            <div className={styles.adminDiv} style={isAdmin?{}:{display: 'none'}}>
-                <Image src={adminIcon} alt="icone logado como admin"/>
+            <div
+                className={styles.adminDiv}
+                style={isAdmin ? {} : { display: "none" }}
+            >
+                <Image src={adminIcon} alt="icone logado como admin" />
                 <p>LOGGED AS ADMIN</p>
             </div>
 
-            <div className={styles.sairDiv}>
-                <Image src={sairIcon} alt="ícone de sair"/>
+            <div className={styles.sairDiv} onClick={handleLogout}>
+                <Image src={sairIcon} alt="ícone de sair" />
                 <p>LEAVE</p>
             </div>
 
-            <Image src={profilePic} alt="imagem do perfil"/>
-
+            <Image
+                className={styles.img}
+                src={profilePic}
+                height={202}
+                width={202}
+                alt="imagem do perfil"
+            />
         </header>
     )
 }

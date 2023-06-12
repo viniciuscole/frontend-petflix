@@ -1,9 +1,9 @@
-.searchBar{
+.searchBar {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
-.searchBar input{
+.searchBar input {
     flex: 1;
     padding: 0.5rem;
     background-color: transparent;
@@ -12,7 +12,8 @@
     border-radius: 0.25rem;
     color: #fff;
 }
-.searchBar input::placeholder{
+.searchBar input::placeholder {
     color: #fff;
     text-align: center;
+    min-width: fit-content;
 }

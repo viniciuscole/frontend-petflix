@@ -11,12 +11,12 @@ export function SearchBar({ placeholderText = "SEARCH MOVIE/TV SERIES" }) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        router.push(`/search?query=${value}&page=1`)
+        router.push(`/search?query=${value}`)
     }
 
     const handleKeyDown = (event) => {
         if (event.key === "Enter") {
-            router.push(`/search?query=${value}&page=1`)
+            router.push(`/search?query=${value}`)
         }
     }
 
