@@ -119,7 +119,7 @@ export function FilmCard({
             const evaluation = {
                 username: response.data.evaluations[i].user.name,
                 profilePic:
-                    "http://200.137.66.9/public/avatar/" +
+                    "http://api-petflix.pet.inf.ufes.br/public/avatar/" +
                     response.data.evaluations[i].user.profilePic +
                     ".png",
                 watchedOn: response.data.evaluations[i].stream,
@@ -151,7 +151,7 @@ export function FilmCard({
 
         setUsername(response.data.user.name)
         setProfilePic(
-            "http://200.137.66.9/public/avatar/" +
+            "http://api-petflix.pet.inf.ufes.br/public/avatar/" +
             response.data.user.profilePic +
             ".png"
         )

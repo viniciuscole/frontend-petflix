@@ -114,7 +114,7 @@ export async function getServerSideProps(context) {
 
     const isAdmin = response.data.user.role === "ADMIN"
     const profilePic =
-        "http://200.137.66.9/public/avatar/" +
+        "http://api-petflix.pet.inf.ufes.br/public/avatar/" +
         response.data.user.profilePic +
         ".png"
     const query = context.query.query
