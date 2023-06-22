@@ -4,7 +4,7 @@ import styles from '../styles/components/SignupForm.module.css'
 
 import exampleProfilePic from "@/assets/exempleProfilePic.png"
 import expandIcon from "@/assets/iconExpand.svg"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { api } from '@/services/api';
 
@@ -36,31 +36,21 @@ export function SignupForm(){
         }
     }
 */
-    let choices = [{profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic},
-        {profilePic:exampleProfilePic}, {profilePic:exampleProfilePic}]
+
+    const [images, setImages] = useState([])
+
+    useEffect(() => {
+        async function fetchImages() {
+            const response = await api.get("/api/avatar")
+            const { amountOfAvatars } = response.data;
+
+            for (let i = 1; i <= amountOfAvatars; i++) {
+                let im = `https://api-petflix.pet.inf.ufes.br/public/avatar/${i}.png`
+                setImages(prevImages => [...prevImages, im])
+            }
+        }
+        fetchImages();
+    }, [])
 
     const handle_expand = () => {
         setExpanded(!isExpanded)
@@ -88,11 +78,11 @@ export function SignupForm(){
         if (user.password === confirmPassword) {
             console.log(user)
             console.log(confirmPassword)
+            api.post("/api/user", user)
         }
         else {
             console.log("As senhas não batem.")
         }
-        //api.post("/user", {})
     }
 
 
@@ -120,10 +110,10 @@ export function SignupForm(){
         <div className={styles.profileContainer}>
             PROFILE PICTURE<br></br>
             <div className={styles.profileChoice}>
-                {choices.map((choice, index) => index < (isExpanded ? choices.length : 9) && (
+                {images.map((image, index) => index < (isExpanded ? images.length : 9) && (
                     <div className={styles.profilePicContainer} key={index}>
                         <button className={styles.profileButton} key={index} onClick={() => handleClick(index+1)}>
-                            <Image src={choice.profilePic} className={styles.profilePic} alt=""/>
+                            <Image src={image} width={202} height={202} className={styles.profilePic} alt=""/>
                         </button>
                     </div>
                 ))}

@@ -7,13 +7,15 @@ import { Footer } from '@/components/Footer'
 import { UserBox } from '@/components/UserBox'
 
 import exempleProfilePic from '@/assets/exempleProfilePic.png'
+import { api } from '@/services/api'
 
-export default function Users(){
+export default function Users({ users, register }) {
 
-    const [isRegisteringAllowed, setIsRegisteringAllowed] = useState(true) // pegar do banco de dados
+    const [isRegisteringAllowed, setIsRegisteringAllowed] = useState(register) // pegar do banco de dados
 
-    const handleRegisteringAllowed = () =>{
+    const handleRegisteringAllowed = () => {
         setIsRegisteringAllowed(!isRegisteringAllowed)
+        api.put("/api/admin/registertoggle");
     }
 
     return (
@@ -27,31 +29,61 @@ export default function Users(){
                             <p id={styles.qtdUsers}>0 USERS</p>
                         </span>
                         <span>
-                            {isRegisteringAllowed ? ( 
-                            <p>REGISTERING ALLOWED</p>
+                            {isRegisteringAllowed ? (
+                                <p>REGISTERING ALLOWED</p>
                             ) : (
-                            <p>REGISTERING NOT ALLOWED</p>
+                                <p>REGISTERING NOT ALLOWED</p>
                             )}
                             <p id={styles.changeBtn} onClick={handleRegisteringAllowed}>CHANGE</p>
                         </span>
                     </section>
                     <section className={styles.usersConteinerContent}>
-                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
-                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
-                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
-                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
-                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
-                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
-                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
-                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
-                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
-                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
-                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
-                        <UserBox profilePic={exempleProfilePic} qtdEvaluations={10} registrationYear={2020} username={"JOAOZIN DO PNEU"}/>
+                        {
+                            users.map((user, index) => {
+                                return <UserBox evaluations={user.evaluations} profilePic={exempleProfilePic} qtdEvaluations={user.evaluations.length} registrationYear={new Date(user.createdAt).getFullYear()} username={user.name} />
+                            })
+                        }
                     </section>
                 </div>
             </div>
             <Footer />
         </div>
     )
+}
+
+
+export async function getServerSideProps(context) {
+    const authorization = context.req.cookies["petflix_token"]
+    let response
+
+
+    try {
+        response = await api.get("/api/admin/users", {
+            headers: {
+                Authorization: authorization,
+            },
+
+        })
+        let register = await api.get("/api/admin/registerison", {
+            headers: {
+                Authorization: authorization
+            }
+        })
+
+        return {
+            props: {
+                users: response.data,
+                register: register.data.registerIsOn
+            }
+        }
+    } catch (err) {
+        console.log(err)
+        return {
+            redirect: {
+                destination: "/home",
+                permanent: false,
+            },
+        }
+    }
+
 }
